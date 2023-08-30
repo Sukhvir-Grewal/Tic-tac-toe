@@ -50,3 +50,5 @@ If somebody wins it creates a text and display it on the screen
 ```
 
 ![V1.0.0_YouWin](/images/V1.0.0_YouWin.png)
+
+Now this game is playable by two persons but there are a lot of stuff we can improve, so let's start working on it
