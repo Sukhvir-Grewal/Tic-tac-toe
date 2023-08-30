@@ -4,9 +4,27 @@
     margin: 1px 1px 5px 1px;
 }
 
-.textbox{
+.GameOVERDisplay{
     font-size: 50px;
+    display:flex;
     position: relative;
-    bottom: 200px;
-    left: 50px;
+    bottom: 199px;
+    left: 400px;
+}
+.glyphicon-repeat:before{
+    position: relative;
+    top: 8px;
+    left: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+.glyphicon-repeat.visible:before {
+    display: block;
+}
+
+.container{
+    text-align: center;
+    position: relative;
+    top: 25vh;
 }

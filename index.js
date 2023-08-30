@@ -11,17 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function YouWin(){
-    var div = document.querySelector(".textbox")
-    var Text = document.createTextNode("YOU WIN")
-    div.appendChild(Text)
+  function GameOVER(){
+    var div = document.querySelector(".GameOVER")
+    div.style.display = "block"
+    var retry_button = document.querySelector(".glyphicon-repeat")
+    retry_button.classList.add("visible");
+
+    retry_button.addEventListener("click", ()=>{
+        location.reload()
+    })
   }
 
   function disableButtons(){
     test.forEach((test)=>{
         test.setAttribute("disabled", "true")
+        test.style.opacity = "0.3"
     })
-    YouWin()
+    GameOVER()
   }
 
   function checkResults() {
