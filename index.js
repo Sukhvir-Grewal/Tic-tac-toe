@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   var test = document.querySelectorAll(".box");
 
   var count = 0;
-  var symbol = "";
-  var loop = true
 
   function checkSymbol(count) {
     if (count % 2 == 0) {
