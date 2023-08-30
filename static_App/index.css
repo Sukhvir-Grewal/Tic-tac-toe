@@ -16,7 +16,7 @@
     top: 8px;
     left: 5px;
     cursor: pointer;
-    display: none;
+    display: none; 
 }
 
 .glyphicon-repeat.visible:before {
