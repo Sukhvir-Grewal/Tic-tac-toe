@@ -37,7 +37,7 @@ test.forEach((test) => {
     });
   });
 ```
-![X and O](/images/V1.0.0_XandO.png)
+![X and O](/static_App/images/V1.0.0_XandO.png)
 
 For now every box I'm using as a button and after every click I'm checking if the player has won or not. 
 If somebody wins it creates a text and display it on the screen
@@ -49,7 +49,7 @@ If somebody wins it creates a text and display it on the screen
   }
 ```
 
-![V1.0.0_YouWin](/images/V1.0.0_YouWin.png)
+![V1.0.0_YouWin](/static_App/images/V1.0.0_YouWin.png)
 
 Now this game is playable by two persons but there are a lot of stuff we can improve, so let's start working on it
 
@@ -58,4 +58,4 @@ Now this game is playable by two persons but there are a lot of stuff we can imp
 
 Instead of manually loading the Page i added a Reload Icon and instead of Showing **You Win** which was bit unclear i replaced it witch **Gamer Over**
 
-![Game Over](/images/V1.1.0_GameOver.png)
+![Game Over](/static_App/images/V1.1.0_GameOver.png)
