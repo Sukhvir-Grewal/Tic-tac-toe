@@ -52,3 +52,10 @@ If somebody wins it creates a text and display it on the screen
 ![V1.0.0_YouWin](/images/V1.0.0_YouWin.png)
 
 Now this game is playable by two persons but there are a lot of stuff we can improve, so let's start working on it
+
+
+# Version 1.1.0
+
+Instead of manually loading the Page i added a Reload Icon and instead of Showing **You Win** which was bit unclear i replaced it witch **Gamer Over**
+
+![Game Over](/images/V1.1.0_GameOver.png)
