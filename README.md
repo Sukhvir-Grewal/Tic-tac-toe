@@ -22,4 +22,31 @@ I wasn't sure how should I come up with the fact that after one turn instead of 
   }
 ```
 
->Now For every First turn player would be to use `X` and for the second player he can use `O`
+>Now For every First turn player would be to use `X` and for the second player he can use `O`, Because after every turn I will increase the counter with one<br>
+
+Like this:
+```js
+test.forEach((test) => {
+    test.addEventListener("click", () => {
+      if (test.innerHTML == "&nbsp;") {
+        symbol = checkSymbol(count);
+        test.innerHTML = symbol;
+        count++;
+        checkResults();
+      }
+    });
+  });
+```
+![X and O](/images/V1.0.0_XandO.png)
+
+For now every box I'm using as a button and after every click I'm checking if the player has won or not. 
+If somebody wins it creates a text and display it on the screen
+```js
+  function YouWin(){
+    var div = document.querySelector(".textbox")
+    var Text = document.createTextNode("YOU WIN")
+    div.appendChild(Text)
+  }
+```
+
+![V1.0.0_YouWin](/images/V1.0.0_YouWin.png)
