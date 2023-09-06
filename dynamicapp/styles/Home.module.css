@@ -1,0 +1,31 @@
+.style1{
+  height: 100px;
+  width: 100px;
+  margin: 1px 1px 5px 1px;
+}
+
+.GameOVERDisplay{
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 200px;
+}
+.glyphicon-repeat:before{
+  position: relative;
+  top: 8px;
+  left: 5px;
+  cursor: pointer;
+  display: none; 
+}
+
+.glyphicon-repeat.visible:before {
+  display: block;
+}
+
+.container{
+  text-align: center;
+  position: relative;
+  top: 25vh;
+  z-index: 1;
+}
