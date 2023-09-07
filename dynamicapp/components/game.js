@@ -64,6 +64,9 @@ export default function Game(props) {
 
   return (
     <>
+      <div>
+        
+      </div>
       <div className={style.container}>
         {winnerNotFound ? (
           boxes.map((box, index) => (

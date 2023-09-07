@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["cyrillic"] });
 
 export default function Home() {
 
-  const [ isSubmitted, setIsSubmitted ] = useState(false)
+  const [ isSubmitted, setIsSubmitted ] = useState(true)
   const [ data, setData ] = useState({}) 
 
   const { register, handleSubmit, setValue } = useForm({
