@@ -40,21 +40,21 @@ export default function Home() {
       <Game Player1={data.Player1} Player2={data.Player2}></Game>
       )
         :(
-          <div className={styles.formContainer}>
-            <form onSubmit={handleSubmit(submitForm)}>  
-              <div className={styles.Player1}>
-                Player 1 : <input {...register("Player1")} required></input>
-              </div><br />
+            <div className={styles.formContainer}>
+              <form onSubmit={handleSubmit(submitForm)}>  
+                <div className={styles.touchAnimation}>
+                  Player 1 : <input {...register("Player1")} required></input>
+                </div><br />
 
-              <div className={styles.Player2}>
-                Player 2 : <input {...register("Player2")} required></input>
-              </div><br />
+                <div className={styles.touchAnimation}>
+                  Player 2 : <input {...register("Player2")} required></input>
+                </div><br />
 
-              <div className={styles.playButton}>
-                <button type="submit">Play</button>
-              </div><br />
-            </form>
-          </div>
+                <div className={styles.touchAnimation}>
+                  <button type="submit">Play</button>
+                </div><br />
+              </form>
+            </div>
 
       )}
     </>
