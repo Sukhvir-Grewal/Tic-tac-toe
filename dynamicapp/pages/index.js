@@ -42,7 +42,6 @@ export default function Home() {
         :(
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit(submitForm)}>  
-              {/* Fill Names <br /> */}
               <div className={styles.Player1}>
                 Player 1 : <input {...register("Player1")} required></input>
               </div><br />
@@ -53,7 +52,7 @@ export default function Home() {
 
               <div className={styles.playButton}>
                 <button type="submit">Play</button>
-              </div>
+              </div><br />
             </form>
           </div>
 

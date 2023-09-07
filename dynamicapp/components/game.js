@@ -45,7 +45,6 @@ export default function Game(props) {
     if (!winnerNotFound) {
       return;
     }
-    // checkWinner()
     const updateBoxes = [...boxes];
     if (updateBoxes[index].symbol === "") {
       setCount((prev) => prev + 1);
@@ -71,7 +70,7 @@ export default function Game(props) {
             <React.Fragment key={index}>
               {(index == 3 || index === 6) && <br />}
               <button
-                className={`${style.style1} ${style.box}`}
+                className={`${style.box} ${style.fadeStyle}`}
                 onClick={() => ChangeSymbol(index)}
               >
                 {box.symbol}&nbsp;
