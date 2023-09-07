@@ -124,6 +124,7 @@ For the future updates my plans are to add a Form to input Player 1 and Player 2
 # Version 2.1.0
 
 In this version I introduced a form where player 1 and player names can be entered,before entering the game I also used summer css to make it look better 
+
 ![Alt text](/dynamicapp/public/v.2.1.0_form.png)
 
 After hitting play button going to the game board seems bit dull, so I added the animation Using CSS, Actually different animation for different screens because my main animation works perfectly with laptop screen, But for smaller screens it looks completely weird so for this phone I added just a simple fade in using media query
