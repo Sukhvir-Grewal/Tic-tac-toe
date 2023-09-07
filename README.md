@@ -121,3 +121,45 @@ const winPatterns = [
 
 For the future updates my plans are to add a Form to input Player 1 and Player 2 Names before displaying the game board, let's code that!
 
+# Version 2.1.0
+
+In this version I introduced a form where player 1 and player names can be entered,before entering the game I also used summer css to make it look better 
+![Alt text](/dynamicapp/public/v.2.1.0_form.png)
+
+After hitting play button going to the game board seems bit dull, so I added the animation Using CSS, Actually different animation for different screens because my main animation works perfectly with laptop screen, But for smaller screens it looks completely weird so for this phone I added just a simple fade in using media query
+
+```css
+@media (min-width:950px) {
+  .fadeStyle {
+    animation: slideIn 3s ease;
+  }
+}
+@media (max-width:950px) {
+  .fadeStyle {
+    animation: fadeIn 4s ease;
+  }
+}
+```
+
+And added their corresponding animations
+```css
+@keyframes slideIn {
+  0% {
+    opacity: 0.1;
+    margin: 1px 100px 1px 100px;
+  }
+  100% {
+    opacity: 1;
+    margin: 1px 1px 1px 1px;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+```
+Yes so far It looks good and it works good but I wanted to use those input player names on the top of play board screen to show How many points each player earned by winning, Let's work on the next Version
