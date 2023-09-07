@@ -65,7 +65,8 @@ export default function Game(props) {
   return (
     <>
       <div>
-        
+        {/* {props.Player1}
+        {props.Player2} */}
       </div>
       <div className={style.container}>
         {winnerNotFound ? (
