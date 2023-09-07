@@ -2,7 +2,7 @@
 
 >[!Note]
 >This Project is just for Practice JavaScript and Game Set-put and also wanna play with Logic.<br>
->**[Static App Link](https://beautiful-lollipop-2f84ff.netlify.app/)**
+>**[Static App Link](https://beautiful-lollipop-2f84ff.netlify.app/)**<br>
 >**[Dynamic App Link](https://tic-tac-toe-one-lemon.vercel.app)**
 
 
