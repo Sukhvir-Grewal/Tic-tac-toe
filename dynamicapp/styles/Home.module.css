@@ -1,64 +1,147 @@
 .box {
-  height: 100px;
-  width: 100px;
-  margin: 1px 1px 1px 1px;
+    height: 100px;
+    width: 100px;
+    margin: 1px 1px 1px 1px;
+    font-size: 30px;
 }
 
 .container {
-  text-align: center;
-  position: relative;
-  top: 25vh;
-  box-shadow: 0px 5px 40px 20px lightpink;
+    text-align: center;
+    position: relative;
+    top: -15vh;
+    box-shadow: 0px 5px 40px 20px lightpink;
+    z-index: 0;
 }
 
 
+@keyframes WinnerDesign {
+    0%{
+        text-shadow: 1px 1px 10px red;
+    }
+    20%{
+        text-shadow: 1px 1px 10px orange;
+    }
+    40%{
+        text-shadow: 1px 1px 10px yellow;
+    }
+    60%{
+        text-shadow: 1px 1px 10px green;
+    }
+    80%{
+        text-shadow: 1px 1px 10px blue;
+    }
+    100%{
+        text-shadow: 1px 1px 10px indigo;
+    }
+}
+
 .formContainer {
-  width: 300px;
-  height: 300px;
-  border: 1px solid black;
-  margin: auto;
-  position: relative;
-  top: 25vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 5px 40px 20px lightpink;
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    margin: auto;
+    position: relative;
+    top: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 5px 40px 20px lightpink;
 }
 
 /* this is what laptops are screens */
-@media (min-width:950px) {
-  .fadeStyle {
-    animation: slideIn 3s ease;
-  }
+@media (min-width: 950px) {
+    .fadeStyle {
+        animation: slideIn 3s ease;
+    }
+    .playerContainer1 {
+        font-size: 40px;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        top: 35vh;
+        left: 25vw;
+        width: 50px;
+        z-index: 1;
+    }
+    .Player1Score {
+        font-size: 60px;
+        z-index: 1;
+    }
+    .playerContainer2 {
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        top: 17vh;
+        left: 70vw;
+        width: 50px;
+        z-index: 1;
+    }
+    .Player2Score {
+        font-size: 60px;
+        z-index: 1;
+    }
+
+    .vs {
+        position: relative;
+        left: 38vw;
+        bottom: 30vw;
+        animation: fadeout 5s ease-out;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .winnerContainer{
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        font-size: xx-large;
+        font-family: 'Pacifico', cursive;
+        animation: WinnerDesign 5s infinite;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
 @keyframes slideIn {
-  0% {
-    opacity: 0.1;
-    margin: 1px 100px 1px 100px;
-  }
-  100% {
-    opacity: 1;
-    margin: 1px 1px 1px 1px;
-  }
+    0% {
+        opacity: 0.1;
+        margin: 1px 100px 1px 100px;
+    }
+    100% {
+        opacity: 1;
+        margin: 1px 1px 1px 1px;
+    }
 }
 
 /* This is for phones */
-@media (max-width:950px) {
-  .fadeStyle {
-    animation: fadeIn 4s ease;
-  }
+@media (max-width: 950px) {
+    .fadeStyle {
+        animation: fadeIn 4s ease;
+    }
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .touchAnimation {
-  touch-action: manipulation;
+    touch-action: manipulation;
 }
+
+

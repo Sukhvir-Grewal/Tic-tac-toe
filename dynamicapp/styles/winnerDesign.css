@@ -1,0 +1,40 @@
+.winnerDesign {
+    position: relative;
+    bottom: 65px;
+    animation: swingName 2s infinite alternate  ease;
+    left: -100px;  
+}
+
+@keyframes swingName {
+    0% {
+        transform-origin: top center;
+        transform: rotate(30deg);
+        bottom: 100px; 
+    }
+    50%{
+        bottom: 80PX;
+    }
+    100% {
+        transform-origin: top center;
+        transform: rotate(-30deg);
+        left: 100px; 
+        bottom: 100px; 
+    }
+}
+
+.chain {
+    position: relative;
+    bottom: 30px;
+    animation: swing 2s infinite alternate  ease;
+}
+
+@keyframes swing {
+    0% {
+        transform-origin: top center;
+        transform: rotate(30deg);
+    }
+    100% {
+        transform-origin: top center;
+        transform: rotate(-30deg);
+    }
+}
