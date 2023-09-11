@@ -217,8 +217,7 @@ export default function Game(props) {
                             height={200}
                             className="chain"
                         />
-                        {/* <p className="winnerDesign">{WinnerName}</p> */}
-                        <p className="winnerDesign">Madhur</p>
+                        <p className="winnerDesign">{WinnerName}</p>
                     </div>
                 </>
             )}
