@@ -221,12 +221,12 @@ export default function Game(props) {
                 </>
             )}
 
-            {/* <Image
+            <Image
                 src="/vs.png"
                 width={300}
                 height={300}
                 className={style.vs}
-            /> */}
+            />
         </>
     );
 }
