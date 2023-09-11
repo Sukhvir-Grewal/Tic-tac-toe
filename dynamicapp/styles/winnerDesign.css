@@ -1,6 +1,5 @@
 .winnerDesign {
     position: relative;
-    bottom: 65px;
     animation: swingName 2s infinite alternate  ease;
     left: -100px;  
 }
@@ -9,16 +8,19 @@
     0% {
         transform-origin: top center;
         transform: rotate(30deg);
-        bottom: 100px; 
+        bottom: 80px; 
     }
-    50%{
-        bottom: 80PX;
+    25%{
+        bottom: 60px;
+    }
+    75%{
+        bottom: 70px;
     }
     100% {
         transform-origin: top center;
         transform: rotate(-30deg);
         left: 100px; 
-        bottom: 100px; 
+        bottom: 80px; 
     }
 }
 

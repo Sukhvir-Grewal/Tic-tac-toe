@@ -20,10 +20,10 @@ export default function Game(props) {
     const [round, setRound] = useState(1);
     const [gameOver, setGameOver] = useState(false);
     const [WinnerName, setWinnerName] = useState("");
-    const [playRound1SoundOnce, setplayRound1SoundOnce] = useState(true);
-    const [playRound2SoundOnce, setplayRound2SoundOnce] = useState(false);
-    const [playRound3SoundOnce, setplayRound3SoundOnce] = useState(false);
-    const [playRound4SoundOnce, setplayRound4SoundOnce] = useState(false);
+    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
+    const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(false);
+    const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(false);
+    const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
     const [finalRoundSoundOnce, setfinalRoundSoundOnce] = useState(false);
 
     let clickAudio;
@@ -95,13 +95,13 @@ export default function Game(props) {
 
                 // This is supposed to be round2 but II don't know why it only works when I set it to round one
                 if (round === 1 && !gameOver) {
-                    setplayRound2SoundOnce(true);
+                    setPlayRound2SoundOnce(true);
                 }
                 if (round === 2 && !gameOver) {
-                    setplayRound3SoundOnce(true);
+                    setPlayRound3SoundOnce(true);
                 }
                 if (round === 3 && !gameOver) {
-                    setplayRound4SoundOnce(true);
+                    setPlayRound4SoundOnce(true);
                 }
                 if (round === 4) {
                     setfinalRoundSoundOnce(true);
@@ -114,19 +114,19 @@ export default function Game(props) {
             }
             if (playRound1SoundOnce) {
                 round1Audio.play();
-                setplayRound1SoundOnce(false);
+                setPlayRound1SoundOnce(false);
             }
             if (playRound2SoundOnce) {
                 round2Audio.play();
-                setplayRound2SoundOnce(false);
+                setPlayRound2SoundOnce(false);
             }
             if (playRound3SoundOnce) {
                 round3Audio.play();
-                setplayRound3SoundOnce(false);
+                setPlayRound3SoundOnce(false);
             }
             if (playRound4SoundOnce) {
                 round4Audio.play();
-                setplayRound4SoundOnce(false);
+                setPlayRound4SoundOnce(false);
             }
             if (finalRoundSoundOnce) {
                 finalRoundAudio.play();
@@ -173,24 +173,6 @@ export default function Game(props) {
         <>
             {winnerNotFound ? (
                 <>
-                    <div className={style.playerContainer1}>
-                        <span className={style.Player1}>
-                            {props.Player1}[X]
-                        </span>
-                        <span className={style.Player1Score}>
-                            {Player1Score}
-                        </span>
-                    </div>
-
-                    <div className={style.playerContainer2}>
-                        <span className={style.Player2}>
-                            {props.Player2}[O]
-                        </span>
-                        <span className={style.Player2Score}>
-                            {Player2Score}
-                        </span>
-                    </div>
-
                     <div className={style.container}>
                         {boxes.map((box, index) => (
                             <React.Fragment key={index}>
@@ -204,6 +186,25 @@ export default function Game(props) {
                             </React.Fragment>
                         ))}
                     </div>
+                    <div className={style.mainContainerForScoreBoard}>
+                        <div className={style.playerContainer1}>
+                            <span className={style.Player1}>
+                                {props.Player1}[X]
+                            </span>
+                            <span className={style.Player1Score}>
+                                {Player1Score}
+                            </span>
+                        </div>
+
+                        <div className={style.playerContainer2}>
+                            <span className={style.Player2}>
+                                {props.Player2}[O]
+                            </span>
+                            <span className={style.Player2Score}>
+                                {Player2Score}
+                            </span>
+                        </div>
+                    </div>
                 </>
             ) : (
                 <>
@@ -216,7 +217,8 @@ export default function Game(props) {
                             height={200}
                             className="chain"
                         />
-                        <p className="winnerDesign">{WinnerName}</p>
+                        {/* <p className="winnerDesign">{WinnerName}</p> */}
+                        <p className="winnerDesign">Madhur</p>
                     </div>
                 </>
             )}

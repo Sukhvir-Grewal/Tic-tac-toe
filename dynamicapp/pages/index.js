@@ -5,7 +5,6 @@ import styles from "@/styles/Home.module.css";
 
 //This will be used by form
 import { useForm } from "react-hook-form";
-import Router from "next/router";
 import Game from "@/components/game";
 import { useState } from "react";
 
