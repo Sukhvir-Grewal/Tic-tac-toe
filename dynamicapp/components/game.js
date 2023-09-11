@@ -212,7 +212,7 @@ export default function Game(props) {
                     <div className={style.winnerContainer}>
                         <p>Winner</p>
                         <Image
-                            src="/chain.png"
+                            src="/images/chain.png"
                             width={200}
                             height={200}
                             className="chain"
@@ -223,7 +223,7 @@ export default function Game(props) {
             )}
 
             <Image
-                src="/vs.png"
+                src="/images/vs.png"
                 width={300}
                 height={300}
                 className={style.vs}
