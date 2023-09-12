@@ -176,8 +176,43 @@ In this version I have covered a lot of stuff, i used the player points to displ
 
  ![v2.2.0_WinnerGif](/dynamicapp/public/gif/v2.2.0_WinnerGif.gif)
 
+I know it is not perfect Swing animation, which is still bugging me but it's better than something not there after winning
 >[!Note]
 >Don't mind my minecraft Mouse 😏
 
 I also used the sounds of mortal combat Rounds like: 
-[Round1](/dynamicapp/public/sounds/round1.mp3)
+[Round1](/dynamicapp/public/sounds/round1.mp3),
+[Round2](/dynamicapp/public/sounds/round2.mp3),
+[Round3](/dynamicapp/public/sounds/round3.mp3),
+[Round4](/dynamicapp/public/sounds/round4.mp3) and
+[FinalRound](/dynamicapp/public/sounds/finalRound.mp3)<br>
+I think its makes my game cool, i don't know.
+
+Next up, as you can see in Gif above i have used [particles](https://particles.js.org) which i haven't yet Dug deeper into Because my main Focus is on the Completion of this project
+
+## What i Learned
+* `css` Skills boosted
+* Learned About `particles`
+* `File-loader` a npm package<br>
+    I am still learning about this but what I have done is used this code to do the configuration for the importing of the MP3 files to use in my code
+    ```js
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.(mp3)$/,
+            use: {
+            loader: 'file-loader',
+            options: {
+                publicPath: '/_next/static/',
+                outputPath: 'static/',
+            },
+            },
+        });
+    
+        return config;
+        },
+    ```
+* `client-side-rendering`<br>
+    This actually took me a longer time to figure out how to put the audio in the next jss app, i was using this line of code `var round1Audio = new Audio(round1Sound);` Which was a keeper giving me error That the audio Constructor is not defined. I tried a ton of time to use it but at the end I did the research that audio constructor is can only be used when the window is defined means that *when code is rendered on the client side*
+    To overcome this I simply used a statement to check whether Or not the code is on the client side or the server side `if (typeof window !== "undefined")` Which solved whole issue
+
+In the next version I just want to add home screen or to do a rematch button after a player has won the game and also I want to save the game progress, right now if we refresh the page we loses all the game progress and just displays the first page
