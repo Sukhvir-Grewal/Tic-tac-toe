@@ -3,9 +3,10 @@
     height: 100px;
     width: 100px;
     margin: 1px 1px 1px 1px;
-    font-size: 50px;
+    font-size: 40px;
     color: rgb(42, 125, 235);
-    font-weight: 900;
+    font-weight: 800;
+    text-align: center;
 }
 .formContainer {
     width: 300px;
