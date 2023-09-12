@@ -177,6 +177,6 @@ In this version I have covered a lot of stuff, i used the player points to displ
  ![v2.2.0_WinnerGif](/dynamicapp/public/gif/v2.2.0_WinnerGif.gif)
 
 >[!Note]
->Don't mind my minecraft Mouse
+>Don't mind my minecraft Mouse 😏
 
 I also used the sounds of mortal combat Rounds like 
