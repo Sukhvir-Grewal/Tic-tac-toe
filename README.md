@@ -170,4 +170,11 @@ Yes so far It looks good and it works good but I wanted to use those input playe
 
 In this version I have covered a lot of stuff, i used the player points to display left and right on the top
 
-![v2.2.0_scoreDisplay](/dynamicapp/public/images/v2.2.0_scoreDisplay.png){width=200px height=200px}
+![v2.2.0_scoreDisplay](/dynamicapp/public/images/v2.2.0_scoreDisplay.png)
+
+ Every time a player scores 3 first will win the Game, and his name will be displayed on the screen with the css animation which took me longer than i thought for coding
+
+ ![v2.2.0_WinnerGif](/dynamicapp/public/gif/v2.2.0_WinnerGif.gif)
+
+
+I also used the sounds of mortal combat Rounds like 
