@@ -3,7 +3,9 @@
     height: 100px;
     width: 100px;
     margin: 1px 1px 1px 1px;
-    font-size: 30px;
+    font-size: 50px;
+    color: rgb(42, 125, 235);
+    font-weight: 900;
 }
 .formContainer {
     width: 300px;
@@ -15,7 +17,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 5px 40px 20px lightpink;
+    box-shadow: 0px 5px 40px 20px lightblue;
+}
+
+.BSbuttons {
+    position: relative;
+    bottom: 80px;
+}
+
+.BSHome {
+    margin-right: 5px;
+}
+.BSRematch {
+    margin-left: 5px;
 }
 
 /* this is what laptops are screens */
@@ -28,35 +42,39 @@
     .fadeStyle {
         animation: slideIn 3s ease;
     }
-    .mainContainerForScoreBoard{
+    .mainContainerForScoreBoard {
         display: flex;
         justify-content: space-between;
-        position:relative;
+        position: relative;
         bottom: 49vh;
     }
     .playerContainer1 {
         font-size: 30px;
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
+        border: 2px solid rgb(42, 125, 235);;
         width: 40%;
         margin-left: 5px;
     }
     .Player1Score {
         font-size: 60px;
+        color: rgb(42, 125, 235);
+        font-weight: 900;
         z-index: 1;
     }
     .playerContainer2 {
         font-size: 30px;
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
+        border: 2px solid rgb(42, 125, 235);;
         width: 40%;
         margin-right: 5px;
     }
     .Player2Score {
         font-size: 60px;
         z-index: 1;
+        color: rgb(42, 125, 235);
+        font-weight: 900;
     }
 
     .vs {
@@ -93,10 +111,10 @@
         width: 100vw;
         height: 100vh;
     }
-    .mainContainerForScoreBoard{
+    .mainContainerForScoreBoard {
         display: flex;
         justify-content: space-between;
-        position:relative;
+        position: relative;
         bottom: 90vh;
     }
     .playerContainer1 {
@@ -115,7 +133,7 @@
         border: 1px solid black;
         width: 40%;
     }
-    .vs{
+    .vs {
         animation: fadeoutPhone 3s ease-out;
         opacity: 0;
         pointer-events: none;
@@ -197,4 +215,3 @@
         text-shadow: 1px 1px 10px indigo;
     }
 }
-

@@ -7,6 +7,7 @@ body {
     text-align: center;
     width: 100vw;
     height: 100vh;
-    box-shadow: inset 0px 5px 40px 20px lightpink;
+    box-shadow: inset 0px 5px 400px 20px lightblue;
     overflow: hidden;
+    background-color: lightgray;
 }

@@ -7,6 +7,7 @@ import styles from "@/styles/Home.module.css";
 import { useForm } from "react-hook-form";
 import Game from "@/components/game";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -40,7 +41,7 @@ export default function Home() {
             </Head>
 
             {isSubmitted ? (
-                <Game Player1={data.Player1} Player2={data.Player2}></Game>
+                <Game Player1={data.Player1} Player2={data.Player2} setIsSubmitted={setIsSubmitted} setValue={setValue}></Game>
             ) : (
                 <div className={styles.formContainer}>
                     <form onSubmit={handleSubmit(submitForm)}>
@@ -57,7 +58,7 @@ export default function Home() {
                         <br />
 
                         <div className={styles.playButton}>
-                            <button type="submit">Play</button>
+                            <Button type="submit">Play</Button>
                         </div>
                         <br />
                     </form>

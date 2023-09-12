@@ -10,6 +10,7 @@ import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import Fireworks from "./Fireworks";
+import { Button } from "react-bootstrap";
 
 export default function Game(props) {
     const [count, setCount] = useState(0);
@@ -24,7 +25,7 @@ export default function Game(props) {
     const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(false);
     const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(false);
     const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
-    const [finalRoundSoundOnce, setfinalRoundSoundOnce] = useState(false);
+    const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(false);
 
     let clickAudio;
     let winAudio;
@@ -103,8 +104,8 @@ export default function Game(props) {
                 if (round === 3 && !gameOver) {
                     setPlayRound4SoundOnce(true);
                 }
-                if (round === 4) {
-                    setfinalRoundSoundOnce(true);
+                if (round === 4 && !gameOver) {
+                    setFinalRoundSoundOnce(true);
                 }
 
                 // Resetting the values in buttons
@@ -130,7 +131,7 @@ export default function Game(props) {
             }
             if (finalRoundSoundOnce) {
                 finalRoundAudio.play();
-                setfinalRoundSoundOnce(false);
+                setFinalRoundSoundOnce(false);
             }
         }
         if (count === 8) {
@@ -169,6 +170,28 @@ export default function Game(props) {
         }
     }
 
+    function rematch() {
+        setWinnerNotFound(true);
+        setCount(0);
+        setRound(1);
+        setPlayRound1SoundOnce(true);
+        setPlayRound2SoundOnce(false);
+        setPlayRound3SoundOnce(false);
+        setPlayRound4SoundOnce(false);
+        setFinalRoundSoundOnce(false);
+        setGameOver(false);
+        setWinnerName("");
+        setPlayer1Score(0);
+        setPlayer2Score(0);
+    }
+
+    function home() {
+        props.setIsSubmitted(false);
+        props.setValue("Player1", "");
+        props.setValue("Player2", "");
+        rematch();
+    }
+
     return (
         <>
             {winnerNotFound ? (
@@ -205,6 +228,12 @@ export default function Game(props) {
                             </span>
                         </div>
                     </div>
+                    <Image
+                        src="/images/vs.png"
+                        width={300}
+                        height={300}
+                        className={style.vs}
+                    />
                 </>
             ) : (
                 <>
@@ -218,16 +247,26 @@ export default function Game(props) {
                             className="chain"
                         />
                         <p className="winnerDesign">{WinnerName}</p>
+                        {/* <p className="winnerDesign">Sukhvir</p> */}
+                    </div>
+                    <div className={style.BSbuttons}>
+                        <Button
+                            variant="outline-primary"
+                            onClick={() => home()}
+                            className={style.BSHome}
+                            >
+                            Home
+                        </Button>
+                        <Button
+                            variant="outline-primary"
+                            onClick={() => rematch()}
+                            className={style.BSRematch}
+                        >
+                            Rematch
+                        </Button>
                     </div>
                 </>
             )}
-
-            <Image
-                src="/images/vs.png"
-                width={300}
-                height={300}
-                className={style.vs}
-            />
         </>
     );
 }
