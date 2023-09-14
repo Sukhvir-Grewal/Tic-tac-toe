@@ -28,8 +28,16 @@ export default function Game(props) {
     const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(false);
     const screenRef = useRef(null);
     const screen = screenRef.current;
-    const [screenText, setScreenText] = useState("Go!");
-    const [screenTextRenderFirstTime, setScreenTextRenderFirstTime] = useState(true);
+
+    // This will create a array of reactor references to all the button array that I will use to enable or disable button
+    const buttonRef = useRef(
+        Array.from({
+            length: boxes.length,
+        }).map(() => React.createRef())
+    );
+    const [screenText, setScreenText] = useState("");
+    const [screenTextRenderFirstTime, setScreenTextRenderFirstTime] =
+        useState(true);
 
     let clickAudio;
     let winAudio;
@@ -51,9 +59,27 @@ export default function Game(props) {
     }
 
     useEffect(() => {
-        controlScreen()
         checkWinner();
         checkWinCondition();
+
+        if (screenTextRenderFirstTime) {
+            disableButtons(4);
+            setScreenTextRenderFirstTime(false);
+            for (let i = 3; i > 0; i--) {
+                setTimeout(() => {
+                    setScreenText(i);
+                }, 1000 * (3 - i + 1));
+            }
+            setTimeout(() => {
+                setScreenText("Go!");
+            }, 4000);
+            setTimeout(() => {
+                controlScreen();
+            }, 5000);
+        } else {
+            controlScreen();
+        }
+
     }, [boxes, Player1Score, Player2Score]);
 
     function checkWinner() {
@@ -165,23 +191,7 @@ export default function Game(props) {
                 symbol: symbol(count),
             };
             setBox(updateBoxes);
-            // controlScreen();
             clickAudio.play();
-            if (count === 8) {
-                setScreenText("It's Draw!");
-                console.log(screen);
-                setTimeout(() => {
-                    if (boxes) {
-                        // Check if boxes is defined
-                        const updatedBoxes = boxes.map((box) => ({
-                            symbol: "",
-                        }));
-                        setBox(updatedBoxes); // Update the state to trigger a re-render
-                        controlScreen();
-                    }
-                }, 1500);
-                setCount(0);
-            }
         }
     }
 
@@ -198,7 +208,8 @@ export default function Game(props) {
         setWinnerName("");
         setPlayer1Score(0);
         setPlayer2Score(0);
-        setScreenText("Go!");
+        setScreenText("");
+        setScreenTextRenderFirstTime(true);
     }
 
     function home() {
@@ -209,11 +220,40 @@ export default function Game(props) {
     }
 
     function controlScreen() {
-        if (count % 2 == 0) {
+        if (count === 9) {
+            setScreenText("It's Draw!");
+            disableButtons(1.6)
+            console.log(screen);
+            setTimeout(() => {
+                if (boxes) {
+                    // Check if boxes is defined
+                    const updatedBoxes = boxes.map((box) => ({
+                        symbol: "",
+                    }));
+                    setBox(updatedBoxes); // Update the state to trigger a re-render
+                }
+            }, 1500);
+            setCount(0);
+        } else if (count % 2 === 0) {
             setScreenText("X's Turn");
-        } else {
+        } else if (count % 2 !== 0) {
             setScreenText("O's Turn");
         }
+    }
+
+    function disableButtons(seconds) {
+        buttonRef.current.forEach((button, index) => {
+            if (button) {
+                button.current.setAttribute("disabled", true);
+            }
+        });
+        setTimeout(() => {
+            buttonRef.current.forEach((button, index) => {
+                if (button) {
+                    button.current.removeAttribute("disabled");
+                }
+            });
+        }, seconds * 1000);
     }
 
     return (
@@ -227,6 +267,7 @@ export default function Game(props) {
                                 <button
                                     className={`${style.box} ${style.fadeStyle}`}
                                     onClick={() => ChangeSymbol(index)}
+                                    ref={buttonRef.current[index]}
                                 >
                                     {box.symbol}&nbsp;
                                 </button>
