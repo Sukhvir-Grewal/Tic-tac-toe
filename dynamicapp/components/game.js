@@ -21,7 +21,7 @@ export default function Game(props) {
     const [round, setRound] = useState(1);
     const [gameOver, setGameOver] = useState(false);
     const [WinnerName, setWinnerName] = useState("");
-    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(false);
+    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
     const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(false);
     const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(false);
     const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
@@ -319,8 +319,8 @@ export default function Game(props) {
                             className="chain"
                             alt="Chain image"
                         />
-                        {/* <p className="winnerDesign">{WinnerName}</p> */}
-                        <p className="winnerDesign">Sukhvir</p>
+                        <p className="winnerDesign">{WinnerName}</p>
+                        {/* <p className="winnerDesign">Sukhvir</p> */}
                     </div>
                     <div className={style.BSbuttons}>
                         <Button
