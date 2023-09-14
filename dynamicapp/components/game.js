@@ -1,6 +1,6 @@
 import style from "@/styles/Home.module.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import clickSound from "@/public/sounds/click.mp3";
 import winSound from "@/public/sounds/win.mp3";
@@ -21,11 +21,15 @@ export default function Game(props) {
     const [round, setRound] = useState(1);
     const [gameOver, setGameOver] = useState(false);
     const [WinnerName, setWinnerName] = useState("");
-    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
+    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(false);
     const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(false);
     const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(false);
     const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
     const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(false);
+    const screenRef = useRef(null);
+    const screen = screenRef.current;
+    const [screenText, setScreenText] = useState("Go!");
+    const [screenTextRenderFirstTime, setScreenTextRenderFirstTime] = useState(true);
 
     let clickAudio;
     let winAudio;
@@ -47,6 +51,7 @@ export default function Game(props) {
     }
 
     useEffect(() => {
+        controlScreen()
         checkWinner();
         checkWinCondition();
     }, [boxes, Player1Score, Player2Score]);
@@ -134,11 +139,6 @@ export default function Game(props) {
                 setFinalRoundSoundOnce(false);
             }
         }
-        if (count === 8) {
-            boxes.forEach((box) => {
-                box.symbol = "";
-            });
-        }
     }
 
     function checkWinCondition() {
@@ -165,8 +165,23 @@ export default function Game(props) {
                 symbol: symbol(count),
             };
             setBox(updateBoxes);
-
+            // controlScreen();
             clickAudio.play();
+            if (count === 8) {
+                setScreenText("It's Draw!");
+                console.log(screen);
+                setTimeout(() => {
+                    if (boxes) {
+                        // Check if boxes is defined
+                        const updatedBoxes = boxes.map((box) => ({
+                            symbol: "",
+                        }));
+                        setBox(updatedBoxes); // Update the state to trigger a re-render
+                        controlScreen();
+                    }
+                }, 1500);
+                setCount(0);
+            }
         }
     }
 
@@ -183,6 +198,7 @@ export default function Game(props) {
         setWinnerName("");
         setPlayer1Score(0);
         setPlayer2Score(0);
+        setScreenText("Go!");
     }
 
     function home() {
@@ -190,6 +206,14 @@ export default function Game(props) {
         props.setValue("Player1", "");
         props.setValue("Player2", "");
         rematch();
+    }
+
+    function controlScreen() {
+        if (count % 2 == 0) {
+            setScreenText("X's Turn");
+        } else {
+            setScreenText("O's Turn");
+        }
     }
 
     return (
@@ -209,6 +233,7 @@ export default function Game(props) {
                             </React.Fragment>
                         ))}
                     </div>
+
                     <div className={style.mainContainerForScoreBoard}>
                         <div className={style.playerContainer1}>
                             <span className={style.Player1}>
@@ -228,12 +253,18 @@ export default function Game(props) {
                             </span>
                         </div>
                     </div>
+
                     <Image
                         src="/images/vs.png"
                         width={300}
                         height={300}
                         className={style.vs}
+                        alt="Versus image"
+                        priority={true}
                     />
+                    <div ref={screenRef} className={style.Screen}>
+                        {screenText}
+                    </div>
                 </>
             ) : (
                 <>
@@ -245,16 +276,17 @@ export default function Game(props) {
                             width={200}
                             height={200}
                             className="chain"
+                            alt="Chain image"
                         />
-                        <p className="winnerDesign">{WinnerName}</p>
-                        {/* <p className="winnerDesign">Sukhvir</p> */}
+                        {/* <p className="winnerDesign">{WinnerName}</p> */}
+                        <p className="winnerDesign">Sukhvir</p>
                     </div>
                     <div className={style.BSbuttons}>
                         <Button
                             variant="outline-primary"
                             onClick={() => home()}
                             className={style.BSHome}
-                            >
+                        >
                             Home
                         </Button>
                         <Button

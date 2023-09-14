@@ -4,8 +4,8 @@
     width: 100px;
     margin: 1px 1px 1px 1px;
     font-size: 40px;
-    color: rgb(42, 125, 235);
-    font-weight: 800;
+    /* color: rgb(42, 125, 235); */
+    /* font-weight: 800; */
     text-align: center;
 }
 .formContainer {
@@ -33,6 +33,15 @@
     margin-left: 5px;
 }
 
+.Screen{
+    width: 200px;
+    height: 110px;
+    border: 2px solid black;
+    margin: auto;
+    position: relative;
+    bottom: 118vh;
+}
+
 /* this is what laptops are screens */
 @media (min-width: 950px) {
     .container {
@@ -53,13 +62,13 @@
         font-size: 30px;
         display: flex;
         flex-direction: column;
-        border: 2px solid rgb(42, 125, 235);;
+        border: 2px solid black;
         width: 40%;
         margin-left: 5px;
     }
     .Player1Score {
         font-size: 60px;
-        color: rgb(42, 125, 235);
+        /* color: rgb(42, 125, 235); */
         font-weight: 900;
         z-index: 1;
     }
@@ -67,14 +76,14 @@
         font-size: 30px;
         display: flex;
         flex-direction: column;
-        border: 2px solid rgb(42, 125, 235);;
+        border: 2px solid black;
         width: 40%;
         margin-right: 5px;
     }
     .Player2Score {
         font-size: 60px;
         z-index: 1;
-        color: rgb(42, 125, 235);
+        /* color: rgb(42, 125, 235); */
         font-weight: 900;
     }
 
