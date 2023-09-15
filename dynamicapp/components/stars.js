@@ -12,7 +12,7 @@ const StarsComponent = (props) => {
         // all options can be found here: https://particles.js.org/docs/interfaces/Options_Interfaces_IOptions.IOptions.html
         return {
             background: {
-                color: "#fff    ",
+                color: "#fff",
             },
             fullScreen: {
                 enable: true,
@@ -49,10 +49,10 @@ const StarsComponent = (props) => {
                     speed: { min: 1, max: 1 },
                 },
                 opacity: {
-                    value: { min: 0.1, max: 0.5 },
+                    value: { min: 0.1, max: 0.2 },
                 },
                 size: {
-                    value: { min: 1, max: 20 },
+                    value: { min: 1, max: 50 },
                 },
             },
         };
