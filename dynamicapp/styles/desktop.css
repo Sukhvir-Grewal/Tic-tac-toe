@@ -1,0 +1,9 @@
+@media (min-width: 950px) {
+    .Screen{
+        width: 200px;
+        height: 110px;
+        border: 2px solid black;
+        margin: auto;
+        position: relative;
+    }
+}

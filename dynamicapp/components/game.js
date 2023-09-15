@@ -21,7 +21,7 @@ export default function Game(props) {
     const [round, setRound] = useState(1);
     const [gameOver, setGameOver] = useState(false);
     const [WinnerName, setWinnerName] = useState("");
-    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
+    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(false);
     const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(false);
     const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(false);
     const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
@@ -79,7 +79,6 @@ export default function Game(props) {
         } else {
             controlScreen();
         }
-
     }, [boxes, Player1Score, Player2Score]);
 
     function checkWinner() {
@@ -222,7 +221,7 @@ export default function Game(props) {
     function controlScreen() {
         if (count === 9) {
             setScreenText("It's Draw!");
-            disableButtons(1.6)
+            disableButtons(1.6);
             console.log(screen);
             setTimeout(() => {
                 if (boxes) {
@@ -260,21 +259,9 @@ export default function Game(props) {
         <>
             {winnerNotFound ? (
                 <>
-                    <div className={style.container}>
-                        {boxes.map((box, index) => (
-                            <React.Fragment key={index}>
-                                {index === 3 || index === 6 ? <br /> : null}
-                                <button
-                                    className={`${style.box} ${style.fadeStyle}`}
-                                    onClick={() => ChangeSymbol(index)}
-                                    ref={buttonRef.current[index]}
-                                >
-                                    {box.symbol}&nbsp;
-                                </button>
-                            </React.Fragment>
-                        ))}
-                    </div>
-
+                    <div ref={screenRef} className={"Screen"}>
+                        {screenText}
+                    </div>  
                     <div className={style.mainContainerForScoreBoard}>
                         <div className={style.playerContainer1}>
                             <span className={style.Player1}>
@@ -295,6 +282,21 @@ export default function Game(props) {
                         </div>
                     </div>
 
+                    <div className={style.container}>
+                        {boxes.map((box, index) => (
+                            <React.Fragment key={index}>
+                                {index === 3 || index === 6 ? <br /> : null}
+                                <button
+                                    className={`${style.box} ${style.fadeStyle}`}
+                                    onClick={() => ChangeSymbol(index)}
+                                    ref={buttonRef.current[index]}
+                                >
+                                    {box.symbol}&nbsp;
+                                </button>
+                            </React.Fragment>
+                        ))}
+                    </div>
+
                     <Image
                         src="/images/vs.png"
                         width={300}
@@ -303,9 +305,6 @@ export default function Game(props) {
                         alt="Versus image"
                         priority={true}
                     />
-                    <div ref={screenRef} className={style.Screen}>
-                        {screenText}
-                    </div>
                 </>
             ) : (
                 <>
@@ -319,8 +318,8 @@ export default function Game(props) {
                             className="chain"
                             alt="Chain image"
                         />
-                        <p className="winnerDesign">{WinnerName}</p>
-                        {/* <p className="winnerDesign">Sukhvir</p> */}
+                        {/* <p className="winnerDesign">{WinnerName}</p> */}
+                        <p className="winnerDesign">Sukhvir</p>
                     </div>
                     <div className={style.BSbuttons}>
                         <Button
