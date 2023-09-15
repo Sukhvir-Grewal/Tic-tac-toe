@@ -10,6 +10,7 @@ import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import Stars from "./stars";
+import Confetti from "./confetti";
 import { Button } from "react-bootstrap";
 
 export default function Game(props) {
@@ -255,9 +256,9 @@ export default function Game(props) {
 
     return (
         <>
-            <Stars />
             {winnerNotFound ? (
                 <>
+                    <Stars />
                     <div className={"mainContainerForScoreBoard"}>
                         <div className={"playerContainer1"}>
                             <span className={style.Player1}>
@@ -307,6 +308,7 @@ export default function Game(props) {
                 </>
             ) : (
                 <>
+                    <Confetti />
                     <div className={style.winnerContainer}>
                         <p>Winner</p>
                         <Image

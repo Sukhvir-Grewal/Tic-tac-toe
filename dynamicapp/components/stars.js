@@ -18,25 +18,25 @@ const StarsComponent = (props) => {
                 enable: true,
                 zIndex: -1,
             },
-            interactivity: {
-                events: {
-                    onClick: {
-                        enable: false, // Disable the click event
-                    },
-                    onHover: {
-                        enable: false,
-                        mode: "repulse",
-                    },
-                },
-                modes: {
-                    push: {
-                        quantity: 10,
-                    },
-                    repulse: {
-                        distance: 100,
-                    },
-                },
-            },
+            // interactivity: {
+            //     events: {
+            //         onClick: {
+            //             enable: false, // Disable the click event
+            //         },
+            //         onHover: {
+            //             enable: false,
+            //             mode: "repulse",
+            //         },
+            //     },
+            //     modes: {
+            //         push: {
+            //             quantity: 10,
+            //         },
+            //         repulse: {
+            //             distance: 100,
+            //         },
+            //     },
+            // },
             particles: {
                 number: {
                     value: 30   , // Set the initial number of particles
