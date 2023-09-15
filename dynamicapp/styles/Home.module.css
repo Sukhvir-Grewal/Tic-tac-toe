@@ -27,9 +27,16 @@
 .vs {
     position: relative;
     bottom: 300px;
-    animation: fadeoutPhone 3s ease-out;
-    opacity: 0;
+    /* animation: fadeoutPhone 3s ease-out; */
+    /* opacity: 0; */
     pointer-events: none;
+}
+
+.SingleHomeButton{
+    margin-top: 30px;
+    position: relative;
+    bottom: 300px;
+
 }
 
 .winnerContainer {

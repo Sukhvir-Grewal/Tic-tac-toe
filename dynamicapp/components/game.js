@@ -16,7 +16,7 @@ import { Button } from "react-bootstrap";
 export default function Game(props) {
     const [count, setCount] = useState(0);
     const [boxes, setBox] = useState([...Array(9).fill({ symbol: "" })]);
-    const [winnerNotFound, setWinnerNotFound] = useState(false);
+    const [winnerNotFound, setWinnerNotFound] = useState(true);
     const [Player1Score, setPlayer1Score] = useState(0);
     const [Player2Score, setPlayer2Score] = useState(0);
     const [round, setRound] = useState(1);
@@ -70,7 +70,7 @@ export default function Game(props) {
                     setScreenText(i);
                 }, 1000 * (2 - i + 1));
             }
-            // disableButtons(3);
+            disableButtons(3);
             setScreenTextRenderFirstTime(false);
             setTimeout(() => {
                 setScreenText("Go!");
@@ -305,6 +305,15 @@ export default function Game(props) {
                         alt="Versus image"
                         priority={true}
                     />
+                    <div className={style.SingleHomeButton}>
+                        <Button
+                            variant="outline-primary"
+                            onClick={() => home()}
+                            className={style.BSHome}
+                        >
+                            Home
+                        </Button>
+                    </div>
                 </>
             ) : (
                 <>
