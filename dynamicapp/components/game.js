@@ -12,6 +12,7 @@ import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import Stars from "./stars";
 import Confetti from "./confetti";
 import { Button } from "react-bootstrap";
+import Home from "@/pages";
 
 export default function Game(props) {
     const [count, setCount] = useState(0);
@@ -28,6 +29,8 @@ export default function Game(props) {
     const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
     const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(false);
     const screenRef = useRef(null);
+    const cancelRef = useRef(null);
+    const confirmRef = useRef(null);
     const screen = screenRef.current;
 
     // This will create a array of reactor references to all the button array that I will use to enable or disable button
@@ -217,6 +220,25 @@ export default function Game(props) {
         rematch();
     }
 
+    function homeInGame() {
+        if (cancelRef && confirmRef) {
+            cancelRef.current.style.visibility = "visible";
+            confirmRef.current.style.visibility = "visible";
+        }
+    }
+    function cancel() {
+        if (cancelRef && confirmRef) {
+            cancelRef.current.style.visibility = "hidden";
+            confirmRef.current.style.visibility = "hidden";
+        }
+    }
+    function confirm() {
+        props.setIsSubmitted(false);
+        props.setValue("Player1", "");
+        props.setValue("Player2", "");
+        rematch();
+    }
+
     function controlScreen() {
         if (count === 9) {
             setScreenText("It's Draw!");
@@ -307,11 +329,27 @@ export default function Game(props) {
                     />
                     <div className={style.SingleHomeButton}>
                         <Button
+                            ref={cancelRef}
+                            onClick={() => cancel()}
+                            className={style.cancel}
+                        >
+                            ❌
+                        </Button>
+
+                        <Button
                             variant="outline-primary"
-                            onClick={() => home()}
-                            className={style.BSHome}
+                            onClick={() => homeInGame()}
+                            className={style.SingleHomeButtonCSS}
                         >
                             Home
+                        </Button>
+
+                        <Button
+                            ref={confirmRef}
+                            onClick={() => confirm()}
+                            className={style.confirm}
+                        >
+                            ✔️
                         </Button>
                     </div>
                 </>
