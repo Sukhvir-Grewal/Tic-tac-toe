@@ -259,11 +259,8 @@ export default function Game(props) {
         <>
             {winnerNotFound ? (
                 <>
-                    <div ref={screenRef} className={"Screen"}>
-                        {screenText}
-                    </div>  
-                    <div className={style.mainContainerForScoreBoard}>
-                        <div className={style.playerContainer1}>
+                    <div className={"mainContainerForScoreBoard"}>
+                        <div className={"playerContainer1"}>
                             <span className={style.Player1}>
                                 {props.Player1}[X]
                             </span>
@@ -271,8 +268,11 @@ export default function Game(props) {
                                 {Player1Score}
                             </span>
                         </div>
+                    <div ref={screenRef} className={"Screen"}>
+                        {screenText}
+                    </div>
 
-                        <div className={style.playerContainer2}>
+                        <div className={"playerContainer2"}>
                             <span className={style.Player2}>
                                 {props.Player2}[O]
                             </span>
