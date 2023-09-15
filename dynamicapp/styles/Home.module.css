@@ -1,6 +1,6 @@
 /* @import "./keyFrames.css"; */
-@import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
-    
+@import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
+
 .formContainer {
     width: 300px;
     height: 300px;
@@ -33,7 +33,7 @@
 }
 
 .winnerContainer {
-    text-transform:capitalize;
+    text-transform: capitalize;
     display: flex;
     flex-direction: column;
     font-size: xx-large;
@@ -43,13 +43,16 @@
     color: rgb(104, 73, 73);
     text-shadow: -1px -1px 1px black;
 }
+.BSHome {
+    margin-right: 10px;
+    width: 100px;
 
+}
+.BSRematch {
+    margin-right: 10px;
+    width: 100px;
 
-
-
-
-
-
+}
 
 @keyframes fadeoutPhone {
     0% {
