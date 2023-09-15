@@ -39,7 +39,7 @@ const StarsComponent = (props) => {
             },
             particles: {
                 number: {
-                    value: 100, // Set the initial number of particles
+                    value: 30   , // Set the initial number of particles
                 },
                 color: {
                     value: "#000", // Set the particle color to black
