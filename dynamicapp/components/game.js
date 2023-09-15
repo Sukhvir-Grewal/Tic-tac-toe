@@ -264,7 +264,7 @@ export default function Game(props) {
                             <span className={style.Player1}>
                                 {props.Player1}[X]
                             </span>
-                            <span className={style.Player1Score}>
+                            <span className={"Player1Score"}>
                                 {Player1Score}
                             </span>
                         </div>
@@ -276,7 +276,7 @@ export default function Game(props) {
                             <span className={style.Player2}>
                                 {props.Player2}[O]
                             </span>
-                            <span className={style.Player2Score}>
+                            <span className={"Player2Score"}>
                                 {Player2Score}
                             </span>
                         </div>

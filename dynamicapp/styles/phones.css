@@ -1,32 +1,49 @@
 @media (max-width: 950px) {
     .Screen{
         width: 20%;
-        height: 100px;
+        height: 80px;
         border: 2px solid black;
-        margin: auto;
         position: relative;
-        padding-top: 30px;
+        padding-top: 20px;
+        margin-top: 10px;   
+        margin-bottom: 10px;
     }
     .mainContainerForScoreBoard {
         display: flex;
         justify-content: space-between;
         position: relative;
         height: 120px;
+        margin-top: 5px;
+        
     }
     .playerContainer1 {
-        font-size: 30px;
+        font-size: 20px;
         display: flex;
         flex-direction: column;
         border: 1px solid black;
-        width: 35%; 
+        width: 37%; 
         height: 100px;
+        margin-left: 5px;
+        padding-top: 10px;  
     }
     .playerContainer2 {
-        font-size: 30px;
+        font-size: 20px;
         display: flex;
         flex-direction: column;
         border: 1px solid black;
-        width: 35%;
+        width: 37%;
         height: 100px;
+        margin-right: 5px;
+        padding-top: 10px;
+    }
+
+    .Player1Score {
+        font-size: 40px;
+        font-weight: 500;
+    }
+
+    .Player2Score {
+        font-size: 40px;
+        font-weight: 500;
     }
 }
