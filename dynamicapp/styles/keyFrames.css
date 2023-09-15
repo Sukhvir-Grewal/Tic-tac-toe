@@ -1,0 +1,55 @@
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+        height: 800px;
+        width: 800px;
+        bottom: 400px;
+    }
+    100% {
+        height: 300px;
+        width: 300px;
+        opacity: 0;
+        visibility: hidden;
+        
+    }
+}
+@keyframes slideIn {
+    0% {
+        opacity: 0.1;
+        margin: 1px 100px 1px 100px;
+    }
+    100% {
+        opacity: 1;
+        margin: 1px 1px 1px 1px;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        background-color: red;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes WinnerDesign {
+    0% {
+        text-shadow: 1px 1px 10px red;
+    }
+    20% {
+        text-shadow: 1px 1px 10px orange;
+    }
+    40% {
+        text-shadow: 1px 1px 10px yellow;
+    }
+    60% {
+        text-shadow: 1px 1px 10px green;
+    }
+    80% {
+        text-shadow: 1px 1px 10px blue;
+    }
+    100% {
+        text-shadow: 1px 1px 10px indigo;
+    }
+}

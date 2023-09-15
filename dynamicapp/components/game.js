@@ -63,19 +63,17 @@ export default function Game(props) {
         checkWinCondition();
 
         if (screenTextRenderFirstTime) {
-            disableButtons(4);
-            setScreenTextRenderFirstTime(false);
-            for (let i = 3; i > 0; i--) {
+            setScreenText(3);
+            for (let i = 2; i > 0; i--) {
                 setTimeout(() => {
                     setScreenText(i);
-                }, 1000 * (3 - i + 1));
+                }, 1000 * (2 - i + 1));
             }
+            disableButtons(3);
+            setScreenTextRenderFirstTime(false);
             setTimeout(() => {
                 setScreenText("Go!");
-            }, 4000);
-            setTimeout(() => {
-                controlScreen();
-            }, 5000);
+            }, 3000);
         } else {
             controlScreen();
         }
@@ -282,12 +280,12 @@ export default function Game(props) {
                         </div>
                     </div>
 
-                    <div className={style.container}>
+                    <div className={"container"}>
                         {boxes.map((box, index) => (
                             <React.Fragment key={index}>
                                 {index === 3 || index === 6 ? <br /> : null}
                                 <button
-                                    className={`${style.box} ${style.fadeStyle}`}
+                                    className={`${style.box} ${"fadeStyle"}`}
                                     onClick={() => ChangeSymbol(index)}
                                     ref={buttonRef.current[index]}
                                 >

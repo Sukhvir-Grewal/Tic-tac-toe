@@ -1,25 +1,4 @@
-/* This is CSS for both phone and desktop */
-.box {
-    height: 100px;
-    width: 100px;
-    margin: 1px 1px 1px 1px;
-    font-size: 40px;
-    /* color: rgb(42, 125, 235); */
-    /* font-weight: 800; */
-    text-align: center;
-}
-.formContainer {
-    width: 300px;
-    height: 300px;
-    border: 1px solid black;
-    margin: auto;
-    position: relative;
-    top: 25vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 5px 40px 20px lightblue;
-}
+
 
 .BSbuttons {
     position: relative;
@@ -108,49 +87,8 @@
 
 /* This is for phones */
 @media (max-width: 950px) {
-    .touchAnimation {
-        touch-action: manipulation;
-    }
-    .fadeStyle {
-        animation: fadeIn 4s ease;
-    }
-    .container {
-        text-align: center;
-        position: relative;
-        top: 25vh;
-        width: 100vw;
-        height: 100vh;
-    }
-    .mainContainerForScoreBoard {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        bottom: 90vh;
-    }
-    .playerContainer1 {
-        font-size: 30px;
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        border: 1px solid black;
-        width: 40%;
-    }
-    .playerContainer2 {
-        font-size: 30px;
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        border: 1px solid black;
-        width: 40%;
-    }
-    .vs {
-        animation: fadeoutPhone 3s ease-out;
-        opacity: 0;
-        pointer-events: none;
-        position: relative;
-        bottom: 82vh;
-    }
 
+ 
     .winnerContainer {
         text-transform: uppercase;
         display: flex;

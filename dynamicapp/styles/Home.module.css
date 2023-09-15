@@ -1,3 +1,18 @@
+/* @import "./keyFrames.css"; */
+
+.formContainer {
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    margin: auto;
+    position: relative;
+    top: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 5px 40px 20px lightblue;
+}
+
 .box {
     height: 100px;
     width: 100px;
@@ -6,4 +21,23 @@
     /* color: rgb(42, 125, 235); */
     /* font-weight: 800; */
     text-align: center;
+}
+
+.vs {
+    position: relative;
+    bottom: 300px;
+    animation: fadeoutPhone 3s ease-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes fadeoutPhone {
+    0% {
+        opacity: 1;
+        transform: scale(2);
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

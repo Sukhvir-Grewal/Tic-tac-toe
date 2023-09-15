@@ -45,13 +45,13 @@ export default function Home() {
             ) : (
                 <div className={styles.formContainer}>
                     <form onSubmit={handleSubmit(submitForm)}>
-                        <div className={styles.touchAnimation}>
+                        <div className={"touchAnimation"}>
                             Player 1 :{" "}
                             <input {...register("Player1")} required></input>
                         </div>
                         <br />
 
-                        <div className={styles.touchAnimation}>
+                        <div className={"touchAnimation"}>
                             Player 2 :{" "}
                             <input {...register("Player2")} required></input>
                         </div>

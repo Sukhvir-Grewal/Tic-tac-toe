@@ -1,4 +1,10 @@
 @media (max-width: 950px) {
+    .touchAnimation {
+        touch-action: manipulation;
+    }
+       .fadeStyle {
+        animation: fadeIn 4s ease;
+    }
     .Screen{
         width: 20%;
         height: 80px;
@@ -45,5 +51,10 @@
     .Player2Score {
         font-size: 40px;
         font-weight: 500;
+    }
+
+    /* This container is for the buttons */
+    .container {
+        margin-top: 20%;
     }
 }
