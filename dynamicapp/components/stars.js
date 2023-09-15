@@ -49,10 +49,10 @@ const StarsComponent = (props) => {
                     speed: { min: 1, max: 1 },
                 },
                 opacity: {
-                    value: { min: 0.1, max: 0.2 },
+                    value: { min: 0.1, max: 0.3 },
                 },
                 size: {
-                    value: { min: 1, max: 50 },
+                    value: { min: 1, max: 30 },
                 },
             },
         };

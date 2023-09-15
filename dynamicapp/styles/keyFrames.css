@@ -24,15 +24,14 @@
         margin: 1px 1px 1px 1px;
     }
 }
-@keyframes fadeIn {
+/* @keyframes fadeIn {
     0% {
         opacity: 0;
-        background-color: red;
     }
     100% {
         opacity: 1;
     }
-}
+} */
 @keyframes WinnerDesign {
     0% {
         text-shadow: 1px 1px 10px red;
