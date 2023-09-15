@@ -1,5 +1,6 @@
 /* @import "./keyFrames.css"; */
-
+@import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
+    
 .formContainer {
     width: 300px;
     height: 300px;
@@ -30,6 +31,25 @@
     opacity: 0;
     pointer-events: none;
 }
+
+.winnerContainer {
+    text-transform:capitalize;
+    display: flex;
+    flex-direction: column;
+    font-size: xx-large;
+    font-family: "Barlow";
+    align-items: center;
+    height: 40vh;
+    color: rgb(104, 73, 73);
+    text-shadow: -1px -1px 1px black;
+}
+
+
+
+
+
+
+
 
 @keyframes fadeoutPhone {
     0% {
