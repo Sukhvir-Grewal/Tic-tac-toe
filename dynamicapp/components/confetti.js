@@ -1,13 +1,12 @@
-import React from 'react'
-import useWindowSize from 'react-use/lib/useWindowSize'
-import Confetti from 'react-confetti'
+import React from 'react';
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti';
 
-export default () => {
-  const { width, height } = useWindowSize()
-  return (
-    <Confetti
-      width={width}
-      height={height}
-    />
-  )
-}
+const ConfettiComponent = () => {
+  const { width, height } = useWindowSize();
+  return <Confetti width={width} height={height} />;
+};
+
+ConfettiComponent.displayName = 'ConfettiComponent'; // Add a display name
+
+export default ConfettiComponent;
