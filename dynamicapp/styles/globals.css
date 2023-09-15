@@ -6,8 +6,6 @@ body {
     text-align: center;
     width: 100vw;
     height: 100vh;
-    box-shadow: inset 0px 5px 400px 20px lightblue;
-    background-color: lightgray;
 }
 
 /* This will help to scroll refresh on phones while disabling the Scrolling down */
@@ -17,6 +15,6 @@ body > .content-wrapper {
 }
 @media (min-width: 950px) {
     body {
-        /* overflow: hidden; */
+        overflow: hidden;
     }
 }
