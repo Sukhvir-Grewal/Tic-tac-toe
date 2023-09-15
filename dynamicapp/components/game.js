@@ -9,10 +9,10 @@ import round2Sound from "@/public/sounds/round2.mp3";
 import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
+import backgroundSound from "@/public/sounds/background.mp3";
 import Stars from "./stars";
 import Confetti from "./confetti";
 import { Button } from "react-bootstrap";
-import Home from "@/pages";
 
 export default function Game(props) {
     const [count, setCount] = useState(0);
@@ -50,17 +50,22 @@ export default function Game(props) {
     let round3Audio;
     let round4Audio;
     let finalRoundAudio;
+    let backgroundAudio;
     // Only use the Audio constructor when the window is ready means the code is rendering on client side
-    if (typeof window !== "undefined") {
-        clickAudio = new Audio(clickSound);
-        winAudio = new Audio(winSound);
-        round1Audio = new Audio(round1Sound);
-        round2Audio = new Audio(round2Sound);
-        round3Audio = new Audio(round3Sound);
-        round4Audio = new Audio(round4Sound);
-        finalRoundAudio = new Audio(finalRoundSound);
-        clickAudio.volume = 0.4;
-    }
+        if (typeof window !== "undefined") {
+            clickAudio = new Audio(clickSound);
+            winAudio = new Audio(winSound);
+            round1Audio = new Audio(round1Sound);
+            round2Audio = new Audio(round2Sound);
+            round3Audio = new Audio(round3Sound);
+            round4Audio = new Audio(round4Sound);
+            finalRoundAudio = new Audio(finalRoundSound);
+            backgroundAudio = new Audio(backgroundSound);
+            backgroundAudio.play()
+            backgroundAudio.volume =  0.01
+            backgroundAudio.loop = true
+            clickAudio.volume = 0.4;
+        }
 
     useEffect(() => {
         checkWinner();

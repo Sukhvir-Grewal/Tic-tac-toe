@@ -2,16 +2,16 @@
     .touchAnimation {
         touch-action: manipulation;
     }
-       .fadeStyle {
+    .fadeStyle {
         animation: fadeIn 4s ease;
     }
-    .Screen{
+    .Screen {
         width: 20%;
         height: 80px;
         border: 2px solid black;
         position: relative;
         padding-top: 20px;
-        margin-top: 10px;   
+        margin-top: 10px;
         margin-bottom: 10px;
     }
     .mainContainerForScoreBoard {
@@ -20,17 +20,16 @@
         position: relative;
         height: 120px;
         margin-top: 5px;
-        
     }
     .playerContainer1 {
         font-size: 20px;
         display: flex;
         flex-direction: column;
         border: 1px solid black;
-        width: 37%; 
+        width: 37%;
         height: 100px;
         margin-left: 5px;
-        padding-top: 10px;  
+        padding-top: 10px;
     }
     .playerContainer2 {
         font-size: 20px;
