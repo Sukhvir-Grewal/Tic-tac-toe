@@ -14,51 +14,9 @@ import round2Sound from "@/public/sounds/round2.mp3";
 import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
-import backgroundSound from "@/public/sounds/background.mp3";
+// import backgroundSound from "@/public/sounds/background.mp3";
 import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
-
-// audio initialization
-let winAudio;
-let round1Audio;
-let round2Audio;
-let round3Audio;
-let round4Audio;
-let finalRoundAudio;
-let backgroundAudio;
-let victoryAudio;
-let youWinAudio;
-
-// Only use the Audio constructor when the window
-// is ready means the code is rendering on client side
-if (typeof window !== "undefined") {
-    winAudio = new Audio(winSound);
-    round1Audio = new Audio(round1Sound);
-    round2Audio = new Audio(round2Sound);
-    round3Audio = new Audio(round3Sound);
-    round4Audio = new Audio(round4Sound);
-    finalRoundAudio = new Audio(finalRoundSound);
-    backgroundAudio = new Audio(backgroundSound);
-    victoryAudio = new Audio(victorySound);
-    youWinAudio = new Audio(youWinSound);
-    // backgroundAudio.play();
-    // backgroundAudio.loop = true;
-
-    // adjusting the volume
-    victoryAudio.volume = 0.5;
-    backgroundAudio.volume = 0.01;
-
-    // Preloading all the audios
-    winAudio.preload = "auto";
-    round1Audio.preload = "auto";
-    round2Audio.preload = "auto";
-    round3Audio.preload = "auto";
-    round4Audio.preload = "auto";
-    finalRoundAudio.preload = "auto";
-    backgroundAudio.preload = "auto";
-    victoryAudio.preload = "auto";
-    youWinAudio.preload = "auto";
-}
 
 export default function Game(props) {
     const [count, setCount] = useState(0);
@@ -181,35 +139,26 @@ export default function Game(props) {
                 : setWinnerName(Player2);
 
             setWinnerNotFound(false);
-            victoryAudio.play();
-            youWinAudio.play();
+            playAudio(victorySound)
+            playAudio(youWinSound)
         } else {
             if (playRound1SoundOnce) {
-                // round1Audio.play();
                 playAudio(round1Sound)
                 setPlayRound1SoundOnce(false);
             } else if (round === 2 && playRound2SoundOnce) {
-                // winAudio.play();
                 playAudio(winSound)
-                // round2Audio.play();
                 playAudio(round2Sound)
                 setPlayRound2SoundOnce(false);
             } else if (round === 3 && playRound3SoundOnce) {
-                // winAudio.play();
                 playAudio(winSound)
-                // round3Audio.play();
                 playAudio(round3Sound)
                 setPlayRound3SoundOnce(false);
             } else if (round === 4 && playRound4SoundOnce) {
-                // winAudio.play();
                 playAudio(winSound)
-                // round4Audio.play();
                 playAudio(round4Sound)
                 setPlayRound4SoundOnce(false);
             } else if (round === 5 && finalRoundSoundOnce) {
-                // winAudio.play();
                 playAudio(winSound)
-                // finalRoundAudio.play();
                 playAudio(finalRoundSound)
                 setFinalRoundSoundOnce(false);
             }
