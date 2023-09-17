@@ -15,7 +15,7 @@ import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import backgroundSound from "@/public/sounds/background.mp3";
-import youWinSound from "@/public/sounds/youWin.mp3";
+import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
 
 // audio initialization
