@@ -67,6 +67,7 @@ export default function Game(props) {
         victoryAudio = new Audio(victorySound);
         youWinAudio = new Audio(youWinSound);
         // backgroundAudio.play();
+        victoryAudio.volume = 0.5
         backgroundAudio.volume = 0.01;
         backgroundAudio.loop = true;
         clickAudio.volume = 0.4;
