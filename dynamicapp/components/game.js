@@ -270,13 +270,13 @@ export default function Game(props) {
 
     function disableButtons(seconds) {
         buttonRef.current.forEach((button, index) => {
-            if (button) {
+            if (button.current) {
                 button.current.setAttribute("disabled", true);
             }
         });
         setTimeout(() => {
             buttonRef.current.forEach((button, index) => {
-                if (button) {
+                if (button.current) {
                     button.current.removeAttribute("disabled");
                 }
             });
@@ -372,8 +372,8 @@ export default function Game(props) {
                             className="chain"
                             alt="Chain image"
                         />
-                        {/* <p className="winnerDesign">{WinnerName}</p> */}
-                        <p className="winnerDesign">Sukhvir</p>
+                        <p className="winnerDesign">{WinnerName}</p>
+                        {/* <p className="winnerDesign">Sukhvir</p> */}
                     </div>
                     <div className={style.BSbuttons}>
                         <Button
