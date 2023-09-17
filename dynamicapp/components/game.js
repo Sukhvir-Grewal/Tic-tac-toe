@@ -19,7 +19,6 @@ import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
 
 // audio initialization
-let clickAudio;
 let winAudio;
 let round1Audio;
 let round2Audio;
@@ -33,7 +32,6 @@ let youWinAudio;
 // Only use the Audio constructor when the window
 // is ready means the code is rendering on client side
 if (typeof window !== "undefined") {
-    clickAudio = new Audio(clickSound);
     winAudio = new Audio(winSound);
     round1Audio = new Audio(round1Sound);
     round2Audio = new Audio(round2Sound);
@@ -49,10 +47,8 @@ if (typeof window !== "undefined") {
     // adjusting the volume
     victoryAudio.volume = 0.5;
     backgroundAudio.volume = 0.01;
-    clickAudio.volume = 0.4;
 
     // Preloading all the audios
-    clickAudio.preload = "auto";
     winAudio.preload = "auto";
     round1Audio.preload = "auto";
     round2Audio.preload = "auto";
@@ -110,13 +106,13 @@ export default function Game(props) {
             }
         };
     }, []);
-    const playAudio = () => {
+    const playAudio = (audioFile) => {
         if (!audioContextRef.current) {
             return;
         }
 
         // Fetch and decode the audio file
-        fetch(clickSound)
+        fetch(audioFile)
             .then((response) => response.arrayBuffer())
             .then((audioData) => {
                 audioContextRef.current.decodeAudioData(audioData, (buffer) => {
@@ -189,23 +185,32 @@ export default function Game(props) {
             youWinAudio.play();
         } else {
             if (playRound1SoundOnce) {
-                round1Audio.play();
+                // round1Audio.play();
+                playAudio(round1Sound)
                 setPlayRound1SoundOnce(false);
             } else if (round === 2 && playRound2SoundOnce) {
-                winAudio.play();
-                round2Audio.play();
+                // winAudio.play();
+                playAudio(winSound)
+                // round2Audio.play();
+                playAudio(round2Sound)
                 setPlayRound2SoundOnce(false);
             } else if (round === 3 && playRound3SoundOnce) {
-                winAudio.play();
-                round3Audio.play();
+                // winAudio.play();
+                playAudio(winSound)
+                // round3Audio.play();
+                playAudio(round3Sound)
                 setPlayRound3SoundOnce(false);
             } else if (round === 4 && playRound4SoundOnce) {
-                winAudio.play();
-                round4Audio.play();
+                // winAudio.play();
+                playAudio(winSound)
+                // round4Audio.play();
+                playAudio(round4Sound)
                 setPlayRound4SoundOnce(false);
             } else if (round === 5 && finalRoundSoundOnce) {
-                winAudio.play();
-                finalRoundAudio.play();
+                // winAudio.play();
+                playAudio(winSound)
+                // finalRoundAudio.play();
+                playAudio(finalRoundSound)
                 setFinalRoundSoundOnce(false);
             }
         }
@@ -214,7 +219,7 @@ export default function Game(props) {
     // This function is responsible for the clicking sound as well as rendering the X and O
     function ChangeSymbol(index) {
         // clickAudio.play();
-        playAudio()
+        playAudio(clickSound)
         if (!winnerNotFound) {
             return;
         }
