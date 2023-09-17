@@ -14,17 +14,6 @@
     box-shadow: 0px 5px 40px 20px lightblue;
 }
 
-.box {
-    height: 100px;
-    width: 100px;
-    margin: 1px 1px 1px 1px;
-    font-size: 40px;
-    color: black;
-    /* color: rgb(42, 125, 235); */
-    /* font-weight: 800; */
-    text-align: center;
-}
-
 .vs {
     position: relative;
     bottom: 300px;

@@ -10,8 +10,8 @@ import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import backgroundSound from "@/public/sounds/background.mp3";
+import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
-import Stars from "./stars";
 import Confetti from "./confetti";
 import { Button } from "react-bootstrap";
 
@@ -53,6 +53,7 @@ export default function Game(props) {
     let finalRoundAudio;
     let backgroundAudio;
     let victoryAudio;
+    let youWinAudio;
     // Only use the Audio constructor when the window is ready means the code is rendering on client side
     if (typeof window !== "undefined") {
         clickAudio = new Audio(clickSound);
@@ -64,6 +65,7 @@ export default function Game(props) {
         finalRoundAudio = new Audio(finalRoundSound);
         backgroundAudio = new Audio(backgroundSound);
         victoryAudio = new Audio(victorySound);
+        youWinAudio = new Audio(youWinSound);
         // backgroundAudio.play();
         backgroundAudio.volume = 0.01;
         backgroundAudio.loop = true;
@@ -78,7 +80,9 @@ export default function Game(props) {
                 console.log(round);
                 return false;
             });
+
             victoryAudio.play();
+            youWinAudio.play();
         } else {
             if (round === 4 && playRound4SoundOnce) {
                 winAudio.play();
@@ -315,7 +319,7 @@ export default function Game(props) {
                             <React.Fragment key={index}>
                                 {index === 3 || index === 6 ? <br /> : null}
                                 <button
-                                    className={`${style.box} ${"fadeStyle"}`}
+                                    className={`${"box"} ${"fadeStyle"}`}
                                     onClick={() => ChangeSymbol(index)}
                                     ref={buttonRef.current[index]}
                                 >

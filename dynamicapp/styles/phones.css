@@ -1,4 +1,14 @@
 @media (max-width: 950px) {
+    .box {
+        height: 100px;
+        width: 100px;
+        margin: 1px 1px 1px 1px;
+        font-size: 30px;
+        color: black;
+        /* color: rgb(42, 125, 235); */
+        /* font-weight: 800; */
+        text-align: center;
+    }
     .touchAnimation {
         touch-action: manipulation;
     }
