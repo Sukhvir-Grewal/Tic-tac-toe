@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import Game from "@/components/game";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import StarsComponent from "@/components/stars";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -28,6 +29,7 @@ export default function Home() {
     }
     return (
         <>
+        <StarsComponent />
             <Head>
                 <title>Tic Tac Toe</title>
                 <meta

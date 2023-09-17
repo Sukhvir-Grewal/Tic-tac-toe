@@ -287,7 +287,6 @@ export default function Game(props) {
         <>
             {winnerNotFound ? (
                 <>
-                    <Stars />
                     <div className={"mainContainerForScoreBoard"}>
                         <div className={"playerContainer1"}>
                             <span className={style.Player1}>
