@@ -54,12 +54,15 @@ export default function Game(props) {
     const audioContextRef = useRef(null);
 
     useEffect(() => {
+        window.addEventListener("beforeunload", confirmExit);
         // Create the audio context when the component mounts
         audioContextRef.current = new (window.AudioContext ||
             window.webkitAudioContext)();
 
         return () => {
-            // Clean up the audio context when the component unmounts
+
+            // Clean up the audio context and event listener when the component unmounts
+            window.removeEventListener("beforeunload", confirmExit);
             if (audioContextRef.current) {
                 audioContextRef.current.close();
             }
@@ -86,6 +89,7 @@ export default function Game(props) {
                 });
             });
     };
+    
     //===================================================
 
     useEffect(() => {
@@ -285,6 +289,15 @@ export default function Game(props) {
             });
         }, seconds * 1000);
     }
+
+    // Dissemination of well show the confirmation 
+    // message to the user before they reload the page
+    const confirmExit = (event) => {
+        event.preventDefault();
+        // Customize the confirmation message
+        event.returnValue =
+            "Are you sure you want to leave? Your game progress will be lost.";
+    };
 
     return (
         <>
