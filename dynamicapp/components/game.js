@@ -50,6 +50,7 @@ export default function Game(props) {
         useState(true);
 
     //===================================================
+    // This is something good I learned
     const audioContextRef = useRef(null);
 
     useEffect(() => {
@@ -64,6 +65,7 @@ export default function Game(props) {
             }
         };
     }, []);
+
     const playAudio = (audioFile) => {
         if (!audioContextRef.current) {
             return;
@@ -139,27 +141,27 @@ export default function Game(props) {
                 : setWinnerName(Player2);
 
             setWinnerNotFound(false);
-            playAudio(victorySound)
-            playAudio(youWinSound)
+            playAudio(victorySound);
+            playAudio(youWinSound);
         } else {
             if (playRound1SoundOnce) {
-                playAudio(round1Sound)
+                playAudio(round1Sound);
                 setPlayRound1SoundOnce(false);
             } else if (round === 2 && playRound2SoundOnce) {
-                playAudio(winSound)
-                playAudio(round2Sound)
+                playAudio(winSound);
+                playAudio(round2Sound);
                 setPlayRound2SoundOnce(false);
             } else if (round === 3 && playRound3SoundOnce) {
-                playAudio(winSound)
-                playAudio(round3Sound)
+                playAudio(winSound);
+                playAudio(round3Sound);
                 setPlayRound3SoundOnce(false);
             } else if (round === 4 && playRound4SoundOnce) {
-                playAudio(winSound)
-                playAudio(round4Sound)
+                playAudio(winSound);
+                playAudio(round4Sound);
                 setPlayRound4SoundOnce(false);
             } else if (round === 5 && finalRoundSoundOnce) {
-                playAudio(winSound)
-                playAudio(finalRoundSound)
+                playAudio(winSound);
+                playAudio(finalRoundSound);
                 setFinalRoundSoundOnce(false);
             }
         }
@@ -168,7 +170,7 @@ export default function Game(props) {
     // This function is responsible for the clicking sound as well as rendering the X and O
     function ChangeSymbol(index) {
         // clickAudio.play();
-        playAudio(clickSound)
+        playAudio(clickSound);
         if (!winnerNotFound) {
             return;
         }
