@@ -14,7 +14,8 @@ const inter = Inter({ subsets: ["cyrillic"] });
 
 export default function Home() {
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [data, setData] = useState({});
+    const [formData, setData] = useState({});
+    const { Player1, Player2 } = formData
 
     const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
@@ -27,6 +28,7 @@ export default function Home() {
         setData(data);
         setIsSubmitted(true);
     }
+
     return (
         <>
         <StarsComponent />
@@ -43,7 +45,7 @@ export default function Home() {
             </Head>
 
             {isSubmitted ? (
-                <Game Player1={data.Player1} Player2={data.Player2} setIsSubmitted={setIsSubmitted} setValue={setValue}></Game>
+                <Game Player1={Player1} Player2={Player2} setIsSubmitted={setIsSubmitted} setValue={setValue}></Game>
             ) : (
                 <div className={styles.formContainer}>
                     <form onSubmit={handleSubmit(submitForm)}>
