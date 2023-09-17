@@ -17,7 +17,7 @@ import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import backgroundSound from "@/public/sounds/background.mp3";
 import youWinSound from "@/public/sounds/youWin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
-
+    
 // audio initialization
 let clickAudio;
 let winAudio;
