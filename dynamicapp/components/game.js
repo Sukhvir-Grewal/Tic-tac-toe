@@ -44,10 +44,24 @@ if (typeof window !== "undefined") {
     victoryAudio = new Audio(victorySound);
     youWinAudio = new Audio(youWinSound);
     // backgroundAudio.play();
+    // backgroundAudio.loop = true;
+
+    // adjusting the volume
     victoryAudio.volume = 0.5;
     backgroundAudio.volume = 0.01;
-    backgroundAudio.loop = true;
     clickAudio.volume = 0.4;
+
+    // Preloading all the audios
+    clickAudio.preload = "auto";
+    winAudio.preload = "auto";
+    round1Audio.preload = "auto";
+    round2Audio.preload = "auto";
+    round3Audio.preload = "auto";
+    round4Audio.preload = "auto";
+    finalRoundAudio.preload = "auto";
+    backgroundAudio.preload = "auto";
+    victoryAudio.preload = "auto";
+    youWinAudio.preload = "auto";
 }
 
 export default function Game(props) {
