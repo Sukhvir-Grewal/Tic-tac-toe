@@ -162,7 +162,6 @@ export default function Game(props) {
 
     // This function is responsible for the clicking sound as well as rendering the X and O
     function ChangeSymbol(index) {
-        clickAudio.play();
         if (!winnerNotFound) {
             return;
         }
@@ -284,9 +283,7 @@ export default function Game(props) {
                 <>
                     <div className={"mainContainerForScoreBoard"}>
                         <div className={"playerContainer1"}>
-                            <span className={style.Player1}>
-                                {Player1}[X]
-                            </span>
+                            <span className={style.Player1}>{Player1}[X]</span>
                             <span className={"Player1Score"}>
                                 {Player1Score}
                             </span>
@@ -296,9 +293,7 @@ export default function Game(props) {
                         </div>
 
                         <div className={"playerContainer2"}>
-                            <span className={style.Player2}>
-                                {Player2}[O]
-                            </span>
+                            <span className={style.Player2}>{Player2}[O]</span>
                             <span className={"Player2Score"}>
                                 {Player2Score}
                             </span>
@@ -311,7 +306,10 @@ export default function Game(props) {
                                 {index === 3 || index === 6 ? <br /> : null}
                                 <button
                                     className={`${"box"} ${"fadeStyle"}`}
-                                    onClick={() => ChangeSymbol(index)}
+                                    onClick={() => {
+                                        clickAudio.play();
+                                        ChangeSymbol(index);
+                                    }}
                                     ref={buttonRef.current[index]}
                                 >
                                     {box.symbol}&nbsp;
