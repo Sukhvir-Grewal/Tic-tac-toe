@@ -95,6 +95,43 @@ export default function Game(props) {
     const [screenTextRenderFirstTime, setScreenTextRenderFirstTime] =
         useState(true);
 
+    //===================================================
+    const audioContextRef = useRef(null);
+
+    useEffect(() => {
+        // Create the audio context when the component mounts
+        audioContextRef.current = new (window.AudioContext ||
+            window.webkitAudioContext)();
+
+        return () => {
+            // Clean up the audio context when the component unmounts
+            if (audioContextRef.current) {
+                audioContextRef.current.close();
+            }
+        };
+    }, []);
+    const playAudio = () => {
+        if (!audioContextRef.current) {
+            return;
+        }
+
+        // Fetch and decode the audio file
+        fetch(clickSound)
+            .then((response) => response.arrayBuffer())
+            .then((audioData) => {
+                audioContextRef.current.decodeAudioData(audioData, (buffer) => {
+                    // Create an audio source and connect it to the context
+                    const source = audioContextRef.current.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(audioContextRef.current.destination);
+
+                    // Start playing the audio
+                    source.start();
+                });
+            });
+    };
+    //===================================================
+
     useEffect(() => {
         checkWinner();
         checkWinCondition();
@@ -176,7 +213,8 @@ export default function Game(props) {
 
     // This function is responsible for the clicking sound as well as rendering the X and O
     function ChangeSymbol(index) {
-        clickAudio.play();
+        // clickAudio.play();
+        playAudio()
         if (!winnerNotFound) {
             return;
         }
@@ -298,9 +336,7 @@ export default function Game(props) {
                 <>
                     <div className={"mainContainerForScoreBoard"}>
                         <div className={"playerContainer1"}>
-                            <span className={style.Player1}>
-                                {Player1}[X]
-                            </span>
+                            <span className={style.Player1}>{Player1}[X]</span>
                             <span className={"Player1Score"}>
                                 {Player1Score}
                             </span>
@@ -310,9 +346,7 @@ export default function Game(props) {
                         </div>
 
                         <div className={"playerContainer2"}>
-                            <span className={style.Player2}>
-                                {Player2}[O]
-                            </span>
+                            <span className={style.Player2}>{Player2}[O]</span>
                             <span className={"Player2Score"}>
                                 {Player2Score}
                             </span>
