@@ -10,6 +10,7 @@ import round3Sound from "@/public/sounds/round3.mp3";
 import round4Sound from "@/public/sounds/round4.mp3";
 import finalRoundSound from "@/public/sounds/finalRound.mp3";
 import backgroundSound from "@/public/sounds/background.mp3";
+import victorySound from "@/public/sounds/victory.mp3";
 import Stars from "./stars";
 import Confetti from "./confetti";
 import { Button } from "react-bootstrap";
@@ -23,11 +24,11 @@ export default function Game(props) {
     const [round, setRound] = useState(1);
     const [gameOver, setGameOver] = useState(false);
     const [WinnerName, setWinnerName] = useState("");
-    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(false);
-    const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(false);
-    const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(false);
-    const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(false);
-    const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(false);
+    const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
+    const [playRound2SoundOnce, setPlayRound2SoundOnce] = useState(true);
+    const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(true);
+    const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(true);
+    const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(true);
     const screenRef = useRef(null);
     const cancelRef = useRef(null);
     const confirmRef = useRef(null);
@@ -51,26 +52,45 @@ export default function Game(props) {
     let round4Audio;
     let finalRoundAudio;
     let backgroundAudio;
+    let victoryAudio;
     // Only use the Audio constructor when the window is ready means the code is rendering on client side
-        if (typeof window !== "undefined") {
-            clickAudio = new Audio(clickSound);
-            winAudio = new Audio(winSound);
-            round1Audio = new Audio(round1Sound);
-            round2Audio = new Audio(round2Sound);
-            round3Audio = new Audio(round3Sound);
-            round4Audio = new Audio(round4Sound);
-            finalRoundAudio = new Audio(finalRoundSound);
-            backgroundAudio = new Audio(backgroundSound);
-            backgroundAudio.play()
-            backgroundAudio.volume =  0.01
-            backgroundAudio.loop = true
-            clickAudio.volume = 0.4;
-        }
+    if (typeof window !== "undefined") {
+        clickAudio = new Audio(clickSound);
+        winAudio = new Audio(winSound);
+        round1Audio = new Audio(round1Sound);
+        round2Audio = new Audio(round2Sound);
+        round3Audio = new Audio(round3Sound);
+        round4Audio = new Audio(round4Sound);
+        finalRoundAudio = new Audio(finalRoundSound);
+        backgroundAudio = new Audio(backgroundSound);
+        victoryAudio = new Audio(victorySound);
+        // backgroundAudio.play();
+        backgroundAudio.volume = 0.01;
+        backgroundAudio.loop = true;
+        clickAudio.volume = 0.4;
+    }
 
     useEffect(() => {
         checkWinner();
-        checkWinCondition();
-
+        if (Player1Score === 3 || Player2Score === 3) {
+            setWinnerNotFound(() => {
+                setRound((prev) => prev - 1);
+                console.log(round);
+                return false;
+            });
+            victoryAudio.play();
+        } else {
+            if (round === 4 && playRound4SoundOnce) {
+                winAudio.play();
+                round4Audio.play();
+                setPlayRound4SoundOnce(false);
+            }
+            if (round === 5 && finalRoundSoundOnce) {
+                winAudio.play();
+                finalRoundAudio.play();
+                setFinalRoundSoundOnce(false);
+            }
+        }
         if (screenTextRenderFirstTime) {
             setScreenText(3);
             for (let i = 2; i > 0; i--) {
@@ -88,6 +108,25 @@ export default function Game(props) {
         }
     }, [boxes, Player1Score, Player2Score]);
 
+    useEffect(() => {
+        if (winnerNotFound) {
+            if (playRound1SoundOnce) {
+                round1Audio.play();
+                setPlayRound1SoundOnce(false);
+            }
+            if (round === 2 && playRound2SoundOnce) {
+                winAudio.play();
+                round2Audio.play();
+                setPlayRound2SoundOnce(false);
+            }
+            if (round === 3 && playRound3SoundOnce) {
+                winAudio.play();
+                round3Audio.play();
+                setPlayRound3SoundOnce(false);
+            }
+        }
+    }, [round, winnerNotFound]);
+
     function checkWinner() {
         const winPatterns = [
             [0, 1, 2],
@@ -99,11 +138,6 @@ export default function Game(props) {
             [0, 4, 8],
             [2, 4, 6],
         ];
-
-        if (Player1Score == 2 || Player2Score == 2) {
-            console.log("Here its working");
-            setGameOver(true);
-        }
 
         for (const pattern of winPatterns) {
             const [a, b, c] = pattern;
@@ -117,58 +151,26 @@ export default function Game(props) {
                     ? setPlayer1Score((prev) => prev + 1)
                     : setPlayer2Score((prev) => prev + 1);
 
-                if (Player1Score == 2) {
+                if (Player1Score === 2) {
                     setWinnerName(props.Player1);
-                }
-                if (Player2Score == 2) {
+                } else if (Player2Score === 2) {
                     setWinnerName(props.Player2);
                 }
+                setRound((prev) => {
+                    return prev + 1;
+                });
+
                 // playing the winning song
                 if (!gameOver) {
-                    winAudio.play();
                 }
-                console.log("Player1:", Player1Score, "Player2:", Player2Score);
-                setRound((prev) => prev + 1);
                 setCount(0);
-
-                // This is supposed to be round2 but II don't know why it only works when I set it to round one
-                if (round === 1 && !gameOver) {
-                    setPlayRound2SoundOnce(true);
-                }
-                if (round === 2 && !gameOver) {
-                    setPlayRound3SoundOnce(true);
-                }
-                if (round === 3 && !gameOver) {
-                    setPlayRound4SoundOnce(true);
-                }
-                if (round === 4 && !gameOver) {
-                    setFinalRoundSoundOnce(true);
-                }
-
                 // Resetting the values in buttons
                 boxes.forEach((box) => {
                     box.symbol = "";
                 });
             }
-            if (playRound1SoundOnce) {
-                round1Audio.play();
-                setPlayRound1SoundOnce(false);
-            }
-            if (playRound2SoundOnce) {
-                round2Audio.play();
-                setPlayRound2SoundOnce(false);
-            }
-            if (playRound3SoundOnce) {
-                round3Audio.play();
-                setPlayRound3SoundOnce(false);
-            }
-            if (playRound4SoundOnce) {
-                round4Audio.play();
-                setPlayRound4SoundOnce(false);
-            }
-            if (finalRoundSoundOnce) {
-                finalRoundAudio.play();
-                setFinalRoundSoundOnce(false);
+            if (Player1Score === 2 || Player2Score === 2) {
+                setGameOver(true);
             }
         }
     }
@@ -176,10 +178,12 @@ export default function Game(props) {
     function checkWinCondition() {
         if (Player1Score === 3 || Player2Score === 3) {
             setWinnerNotFound(false);
+            victoryAudio.play();
         }
     }
 
     function ChangeSymbol(index) {
+        clickAudio.play();
         if (!winnerNotFound) {
             return;
         }
@@ -197,7 +201,6 @@ export default function Game(props) {
                 symbol: symbol(count),
             };
             setBox(updateBoxes);
-            clickAudio.play();
         }
     }
 
@@ -206,10 +209,10 @@ export default function Game(props) {
         setCount(0);
         setRound(1);
         setPlayRound1SoundOnce(true);
-        setPlayRound2SoundOnce(false);
-        setPlayRound3SoundOnce(false);
-        setPlayRound4SoundOnce(false);
-        setFinalRoundSoundOnce(false);
+        setPlayRound2SoundOnce(true);
+        setPlayRound3SoundOnce(true);
+        setPlayRound4SoundOnce(true);
+        setFinalRoundSoundOnce(true);
         setGameOver(false);
         setWinnerName("");
         setPlayer1Score(0);
@@ -248,7 +251,6 @@ export default function Game(props) {
         if (count === 9) {
             setScreenText("It's Draw!");
             disableButtons(1.6);
-            console.log(screen);
             setTimeout(() => {
                 if (boxes) {
                     // Check if boxes is defined
