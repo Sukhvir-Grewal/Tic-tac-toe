@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import Image from "next/image";
-import Confetti from "./confetti";
+import Confetti from "../components/confetti";
+import { Router, useRouter } from "next/router";
 
 // Importing CSS files
 import style from "@/styles/Home.module.css";
@@ -17,6 +18,7 @@ import finalRoundSound from "@/public/sounds/finalRound.mp3";
 // import backgroundSound from "@/public/sounds/background.mp3";
 import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
+import StarsComponent from "@/components/stars";
 
 export default function Game(props) {
     const [count, setCount] = useState(0);
@@ -24,6 +26,7 @@ export default function Game(props) {
     const [winnerNotFound, setWinnerNotFound] = useState(true);
     const [Player1Score, setPlayer1Score] = useState(0);
     const [Player2Score, setPlayer2Score] = useState(0);
+    const [GoHome, setGoHome] = useState(false);
     const [round, setRound] = useState(1);
     const [WinnerName, setWinnerName] = useState("");
     const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
@@ -34,9 +37,10 @@ export default function Game(props) {
     const screenRef = useRef(null);
     const cancelRef = useRef(null);
     const confirmRef = useRef(null);
+    const router = useRouter();
 
     // Distracting variables
-    const { Player1, Player2 } = props;
+    const { Player1, Player2 } = router.query;
 
     // This will create a array of reactor references to all the
     // button array that I will use to enable or disable button
@@ -60,7 +64,6 @@ export default function Game(props) {
             window.webkitAudioContext)();
 
         return () => {
-
             // Clean up the audio context and event listener when the component unmounts
             window.removeEventListener("beforeunload", confirmExit);
             if (audioContextRef.current) {
@@ -89,14 +92,17 @@ export default function Game(props) {
                 });
             });
     };
-    
+
     //===================================================
 
     useEffect(() => {
         checkWinner();
         checkWinCondition();
         controlScreen();
-    }, [boxes, Player1Score, Player2Score]);
+        if (GoHome) {
+            router.push("/");
+        }
+    }, [boxes, Player1Score, Player2Score, GoHome]);
 
     // This function is responsible for the following:
     // 1. it checks the winning pattern
@@ -145,8 +151,8 @@ export default function Game(props) {
                 : setWinnerName(Player2);
 
             setWinnerNotFound(false);
-            playAudio(victorySound);
             playAudio(youWinSound);
+            playAudio(victorySound);
         } else {
             if (playRound1SoundOnce) {
                 playAudio(round1Sound);
@@ -212,10 +218,8 @@ export default function Game(props) {
     }
 
     function home() {
-        props.setIsSubmitted(false);
-        props.setValue("Player1", "");
-        props.setValue("Player2", "");
         rematch();
+        setGoHome(true);
     }
 
     function homeInGame() {
@@ -229,12 +233,6 @@ export default function Game(props) {
             cancelRef.current.style.visibility = "hidden";
             confirmRef.current.style.visibility = "hidden";
         }
-    }
-    function confirm() {
-        props.setIsSubmitted(false);
-        props.setValue("Player1", "");
-        props.setValue("Player2", "");
-        rematch();
     }
 
     // This is the kind of the main part of the game where player
@@ -290,7 +288,7 @@ export default function Game(props) {
         }, seconds * 1000);
     }
 
-    // Dissemination of well show the confirmation 
+    // Dissemination of well show the confirmation
     // message to the user before they reload the page
     const confirmExit = (event) => {
         event.preventDefault();
@@ -301,6 +299,7 @@ export default function Game(props) {
 
     return (
         <>
+            <StarsComponent />
             {winnerNotFound ? (
                 <>
                     <div className={"mainContainerForScoreBoard"}>
@@ -364,7 +363,7 @@ export default function Game(props) {
 
                         <Button
                             ref={confirmRef}
-                            onClick={() => confirm()}
+                            onClick={() => home()}
                             className={style.confirm}
                         >
                             ✔️
