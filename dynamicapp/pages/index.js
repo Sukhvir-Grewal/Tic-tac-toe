@@ -11,7 +11,7 @@ export default function Home() {
     return (
         <>
             <div>
-                <CardGroup style={{ alignItems: "center", justifyContent:"center", position:"relative", top:"10vh" }}>
+                <CardGroup style={{display:"flex", alignItems: "center", justifyContent:"center", position:"relative", top:"10vh" }}>
                     <Link href="/form" gameMode="BOT">
                         <Card className="SelectGameModeCard">
                             <Card.Body className="d-flex flex-column align-items-center justify-content-center">
