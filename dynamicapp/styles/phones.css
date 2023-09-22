@@ -66,4 +66,9 @@
     .container {
         margin-top: 20%;
     }
+    .SelectGameModeCard {
+        width: 100px;
+        height: 200px;
+        margin-left: 5px;
+    }
 }

@@ -8,7 +8,6 @@
         /* color: rgb(42, 125, 235); */
         /* font-weight: 800; */
         text-align: center;
-        
     }
     .Screen {
         width: 20%;
@@ -55,9 +54,13 @@
     .Player2Score {
         font-size: 40px;
         font-weight: 500;
-    }     
+    }
     .fadeStyle {
         animation: slideIn 3s ease;
-
+    }
+    .SelectGameModeCard {
+        width: 300px;
+        height: 400px;
+        margin-left: 5px;
     }
 }
