@@ -15,12 +15,13 @@ const inter = Inter({ subsets: ["cyrillic"] });
 export default function Form() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [formData, setData] = useState({});
-    const { Player1, Player2 } = formData;
+    const { Player1, Player2, Turn } = formData;
 
     const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
             Player1: "",
             Player2: "",
+            Turn: "",
         },
     });
 
@@ -33,17 +34,18 @@ export default function Form() {
         Router.push({
             pathname: "/game",
             query: {
-                Player1: Player1, 
+                Player1: Player1,
                 Player2: Player2,
+                Turn: Turn,
             },
         });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isSubmitted) {
             pushToGame();
         }
-    },[isSubmitted])
+    }, [isSubmitted]);
 
     return (
         <>
@@ -73,17 +75,36 @@ export default function Form() {
             ) : (
                 <div className={styles.formContainer}>
                     <form onSubmit={handleSubmit(submitForm)}>
-                        <div className={"touchAnimation"}>
+                        <div className="touchAnimation">
                             Player 1 :{" "}
                             <input {...register("Player1")} required></input>
                         </div>
                         <br />
 
-                        <div className={"touchAnimation"}>
+                        <div className="touchAnimation">
                             Player 2 :{" "}
                             <input {...register("Player2")} required></input>
                         </div>
                         <br />
+                        <div className="touchAnimation">First Turn:</div>
+                        <label>
+                            <input
+                                type="radio"
+                                {...register("Turn")}
+                                value="p1"
+                                required
+                            />{" "}
+                            Player 1
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                {...register("Turn")}
+                                value="p2"
+                                required
+                            />{" "}
+                            Player 2
+                        </label>
 
                         <div className={styles.playButton}>
                             <Button type="submit">Play</Button>

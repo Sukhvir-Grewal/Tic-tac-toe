@@ -18,9 +18,8 @@ import finalRoundSound from "@/public/sounds/finalRound.mp3";
 // import backgroundSound from "@/public/sounds/background.mp3";
 import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
-import StarsComponent from "@/components/stars";
 
-export default function Game() {
+export default function Game(props) {
     const [count, setCount] = useState(0);
     const [boxes, setBox] = useState([...Array(9).fill({ symbol: "" })]);
     const [winnerNotFound, setWinnerNotFound] = useState(true);
@@ -34,14 +33,13 @@ export default function Game() {
     const [playRound3SoundOnce, setPlayRound3SoundOnce] = useState(true);
     const [playRound4SoundOnce, setPlayRound4SoundOnce] = useState(true);
     const [finalRoundSoundOnce, setFinalRoundSoundOnce] = useState(true);
-    const [checkFirstLoad, setCheckFirstLoad] = useState(true);
     const screenRef = useRef(null);
     const cancelRef = useRef(null);
     const confirmRef = useRef(null);
     const router = useRouter();
 
     // Distracting variables
-    var { Player1, Player2, Turn } = router.query;
+    const { Player1, Player2 } = router.query;
 
     // This will create a array of reactor references to all the
     // button array that I will use to enable or disable button
@@ -50,7 +48,6 @@ export default function Game() {
             length: boxes.length,
         }).map(() => React.createRef())
     );
-    const vsImageRef = useRef(null);
     const [screenText, setScreenText] = useState("");
     const [screenTextRenderFirstTime, setScreenTextRenderFirstTime] =
         useState(true);
@@ -60,12 +57,34 @@ export default function Game() {
     const audioContextRef = useRef(null);
 
     useEffect(() => {
+        window.addEventListener("beforeunload", confirmExit);
         // Create the audio context when the component mounts
         audioContextRef.current = new (window.AudioContext ||
             window.webkitAudioContext)();
 
+        // Loading the saved game
+        if (typeof window !== "undefined") {
+            const savedGameState = window.localStorage.getItem("gameState");
+            if (savedGameState) {
+                const gameState = JSON.parse(savedGameState);
+
+                // Set state variables based on the saved game state
+                setPlayer1Score(gameState.Player1Score);
+                setPlayer2Score(gameState.Player2Score);
+                if (
+                    gameState.boxes &&
+                    Array.isArray(gameState.boxes) &&
+                    gameState.boxes.length === 9
+                ) {
+                    setBox(gameState.boxes);
+                }
+                setRound(gameState.round);
+            }
+        }
+
         return () => {
-            // Clean up the audio context when the component unmounts
+            // Clean up the audio context and event listener when the component unmounts
+            window.removeEventListener("beforeunload", confirmExit);
             if (audioContextRef.current) {
                 audioContextRef.current.close();
             }
@@ -99,10 +118,23 @@ export default function Game() {
         checkWinner();
         checkWinCondition();
         controlScreen();
-        OnFirstLoad();
-
-        if (GoHome) router.push("/");
+        if (GoHome) {
+            router.push("/");
+        }
     }, [boxes, Player1Score, Player2Score, GoHome]);
+
+    // *********************logical for saving game*********************
+    // Save game state to local storage whenever it changes
+    const updateLocalStorage = (key, value) => {
+        if (typeof window !== "undefined") {
+            const localStorageData =
+                JSON.parse(localStorage.getItem("gameState")) || {};
+            localStorageData[key] = value;
+            localStorage.setItem("gameState", JSON.stringify(localStorageData));
+        }
+    };
+
+    // *****************************************************************
 
     // This function is responsible for the following:
     // 1. it checks the winning pattern
@@ -128,17 +160,13 @@ export default function Game() {
                 boxes[a].symbol === boxes[c].symbol
             ) {
                 // Increasing score when one player wins
-                // TThe winner will get the turn first
-                if (boxes[a].symbol === "X") {
-                    setPlayer1Score((prev) => prev + 1);
-                    setCount(0);
-                } else {
-                    setPlayer2Score((prev) => prev + 1);
-                    setCount(1);
-                }
+                updatePlayerScores(boxes[a].symbol);
 
-                disableButtons(3);
                 setRound((prev) => prev + 1);
+                updateLocalStorage("round", round);
+
+                // This will automatically give a turn to X after each round
+                setCount(0);
                 // Resetting the values in buttons to empty
                 boxes.forEach((box) => {
                     box.symbol = "";
@@ -146,6 +174,16 @@ export default function Game() {
             }
         }
     }
+
+    const updatePlayerScores = (winnerSymbol) => {
+        if (winnerSymbol === "X") {
+            setPlayer1Score((prev) => prev + 1);
+            updateLocalStorage("Player1Score", Player1Score);
+        } else if (winnerSymbol === "O") {
+            setPlayer2Score((prev) => prev + 1);
+            updateLocalStorage("Player2Score", Player2Score);
+        }
+    };
 
     // This function checks the victory of a player as well as plays the Round and Win Sound
     function checkWinCondition() {
@@ -155,8 +193,9 @@ export default function Game() {
                 : setWinnerName(Player2);
 
             setWinnerNotFound(false);
-            playAudio(youWinSound);
             playAudio(victorySound);
+            playAudio(youWinSound);
+            resetValuesInLocalStorage();
         } else {
             if (playRound1SoundOnce) {
                 playAudio(round1Sound);
@@ -190,6 +229,7 @@ export default function Game() {
         }
         const updateBoxes = [...boxes];
         if (updateBoxes[index].symbol === "") {
+            setCount((prev) => prev + 1);
             const symbol = (count) => {
                 if (count % 2 === 0) {
                     return "X";
@@ -201,7 +241,7 @@ export default function Game() {
                 symbol: symbol(count),
             };
             setBox(updateBoxes);
-            setCount((prev) => prev + 1);
+            updateLocalStorage("boxes", updateBoxes);
         }
     }
 
@@ -219,7 +259,6 @@ export default function Game() {
         setPlayer2Score(0);
         setScreenText("");
         setScreenTextRenderFirstTime(true);
-        setCheckFirstLoad(true);
     }
 
     function home() {
@@ -270,9 +309,9 @@ export default function Game() {
                 }, 1500);
                 setCount(0);
             } else if (count % 2 === 0) {
-                setScreenText(`${Player1}'s Turn`);
+                setScreenText("X's Turn");
             } else if (count % 2 !== 0) {
-                setScreenText(`${Player2}'s Turn`);
+                setScreenText("O's Turn");
             }
         }
     }
@@ -293,34 +332,32 @@ export default function Game() {
         }, seconds * 1000);
     }
 
-    function OnFirstLoad() {
-        if (checkFirstLoad) {
-            buttonRef.current.forEach((button) => {
-                if (button.current) button.current.classList.add("fadeStyle");
-            });
-            if (vsImageRef.current)
-                vsImageRef.current.classList.add(style.vsFadeOut);
-            setCheckFirstLoad(false);
-        }
-    }
+    // Dissemination of well show the confirmation
+    // message to the user before they reload the page
+    const confirmExit = (event) => {
+        event.preventDefault();
+        // Customize the confirmation message
+        event.returnValue =
+            "Are you sure you want to leave? Your game progress will be lost.";
+    };
 
+
+    function resetValuesInLocalStorage(){
+        updateLocalStorage("Player1Score",0)
+        updateLocalStorage("Player2Score",0)
+        updateLocalStorage("round",0)
+         const updatedBoxes = boxes.map((box) => ({
+                            symbol: "",
+                        }));
+                        setBox(updatedBoxes); // 
+    }
     return (
         <>
-            <StarsComponent />
             {winnerNotFound ? (
                 <>
-                    {Turn === "p2" &&
-                        (() => {
-                            const temp = Player1;
-                            Player1 = Player2;
-                            Player2 = temp;
-                        })()}
                     <div className={"mainContainerForScoreBoard"}>
                         <div className={"playerContainer1"}>
-                            <span className={style.Player1}>
-                                {Player1}&nbsp;
-                                <b>[X]</b>
-                            </span>
+                            <span className={style.Player1}>{Player1}[X]</span>
                             <span className={"Player1Score"}>
                                 {Player1Score}
                             </span>
@@ -330,10 +367,7 @@ export default function Game() {
                         </div>
 
                         <div className={"playerContainer2"}>
-                            <span className={style.Player2}>
-                                {Player2}&nbsp;
-                                <b>[O]</b>
-                            </span>
+                            <span className={style.Player2}>{Player2}[O]</span>
                             <span className={"Player2Score"}>
                                 {Player2Score}
                             </span>
@@ -345,7 +379,7 @@ export default function Game() {
                             <React.Fragment key={index}>
                                 {index === 3 || index === 6 ? <br /> : null}
                                 <button
-                                    className={`${"box"}`}
+                                    className={`${"box"} ${"fadeStyle"}`}
                                     onClick={() => ChangeSymbol(index)}
                                     ref={buttonRef.current[index]}
                                 >
@@ -360,7 +394,6 @@ export default function Game() {
                         width={300}
                         height={300}
                         className={style.vs}
-                        ref={vsImageRef}
                         alt="Versus image"
                         priority={true}
                     />

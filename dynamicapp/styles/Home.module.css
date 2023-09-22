@@ -1,6 +1,8 @@
 /* @import "./keyFrames.css"; */
 @import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
 
+
+
 .formContainer {
     width: 300px;
     height: 300px;
@@ -17,28 +19,29 @@
 .vs {
     position: relative;
     bottom: 300px;
-    animation: fadeoutPhone 3s ease-out; 
     opacity: 0;
     pointer-events: none;
 }
+.vsFadeOut {
+    animation: fadeoutPhone 3s ease-out;
+}
 
-.SingleHomeButton{
+.SingleHomeButton {
     margin-top: 30px;
     position: relative;
     bottom: 300px;
-    
 }
-.SingleHomeButtonCSS{
+.SingleHomeButtonCSS {
     width: 100px;
     margin: 0 5px 0 5px;
 }
 
-.cancel{
+.cancel {
     visibility: hidden;
     background-color: transparent;
     border-color: white;
 }
-.confirm{
+.confirm {
     visibility: hidden;
     background-color: transparent;
     border-color: white;
@@ -58,14 +61,11 @@
 .BSHome {
     margin-right: 10px;
     width: 100px;
-
 }
 .BSRematch {
     margin-right: 10px;
     width: 100px;
-
 }
-
 
 @keyframes fadeoutPhone {
     0% {
