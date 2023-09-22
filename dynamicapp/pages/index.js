@@ -7,16 +7,15 @@ export default function Home() {
         <>
             <div>
                 <div
-                    style={{
-                        color: "#0000EE",
-                        position: "relative",
-                        top: "4vh",
-                        fontSize:"20px"
-                    }}
+                    // style={{
+                    //     position: "relative",
+                    //     top: "4vh",
+                    //     fontSize:"20px"
+                    // }}
                 >
                     Select A Game Mode
                 </div>
-                <CardGroup
+                <CardGroup 
                     style={{
                         alignItems: "center",
                         justifyContent: "center",
