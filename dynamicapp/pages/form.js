@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import StarsComponent from "@/components/stars";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -16,6 +16,8 @@ export default function Form() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [formData, setData] = useState({});
     const { Player1, Player2, Turn } = formData;
+    const router = useRouter();
+    const { gameMode } = router.query;
 
     const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
@@ -31,14 +33,23 @@ export default function Form() {
     }
 
     function pushToGame() {
-        Router.push({
-            pathname: "/game",
-            query: {
-                Player1: Player1,
-                Player2: Player2,
-                Turn: Turn,
-            },
-        });
+        gameMode === "BOT"
+            ? Router.push({
+                  pathname: "/game",
+                  query: {
+                      Player1: Player1,
+                      Player2: Player2,
+                      Turn: Turn,
+                  },
+              })
+            : Router.push({
+                  pathname: "/gameIG",
+                  query: {
+                      Player1: Player1,
+                      Player2: Player2,
+                      Turn: Turn,
+                  },
+              });
     }
 
     useEffect(() => {
