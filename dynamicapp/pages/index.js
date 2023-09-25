@@ -1,15 +1,20 @@
 import { Card, CardGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import StarsComponent from "@/components/stars";
+import { useRouter } from "next/router";
 
 export default function Home() {
     const [hoveredCard, setHoveredCard] = useState(null);
-
+    const router = useRouter()
 
     const handleCardHover = (gameMode) => {
         setHoveredCard(gameMode);
     };
+    useEffect(()=>{
+        router.push("/gameCOM")
+
+    })
 
     return (
         <>
