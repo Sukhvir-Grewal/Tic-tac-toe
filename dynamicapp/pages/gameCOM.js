@@ -20,7 +20,7 @@ import youWinSound from "@/public/sounds/youwin.mp3";
 import victorySound from "@/public/sounds/victory.mp3";
 import StarsComponent from "@/components/stars";
 
-export default function gameCom() {
+export default function GameCom() {
     const [count, setCount] = useState(0);
     const [boxes, setBox] = useState([...Array(9).fill({ symbol: "" })]);
     const [winnerNotFound, setWinnerNotFound] = useState(true);
