@@ -341,7 +341,7 @@ export default function GameCom() {
                         symbol: "O",
                     };
                     setBox(newBoxes);
-                } else if (
+                } else if ( 
                     boxes[5].symbol === "X" ||
                     boxes[1].symbol === "X" ||
                     boxes[2].symbol === "X"
