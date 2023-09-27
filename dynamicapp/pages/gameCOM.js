@@ -143,6 +143,21 @@ export default function GameCom() {
         var moveNotFound = true;
         var emptySpace = false;
 
+        var count8Values = boxes.filter(
+            (box) => box.symbol === "X" || box.symbol === "O"
+        ).length;
+        if (count8Values === 7) {
+            const updatedBoxes = boxes.map((box) => {
+                if (box.symbol === "") {
+                    return { symbol: "O" };
+                } else {
+                    return box;
+                }
+            });
+
+            setBox(updatedBoxes);
+            }
+
         // If Computer Have First Turn Choose one corner
         if (boxesIsEmpty()) {
             var corners = [0, 2, 6, 8];
@@ -158,12 +173,19 @@ export default function GameCom() {
 
         // Check the Number of X in Board to choose second and third move for computer
         var countX = boxes.filter((box) => box.symbol === "X").length;
+        var TurnOffTheMiddleFlag = true;
 
         if (countX === 1 && SecondTurnFlagON) {
+            if (boxes[4].symbol === "X") {
+                TurnOffTheMiddleFlag = false;
+                setSecondTurnFlagON(false);
+            }
             if (RandomCorner === 0) {
-                if (boxes[1].symbol === "X" || boxes[2].symbol === "X") {
-                    console.log("1111");
-
+                if (
+                    boxes[1].symbol === "X" ||
+                    boxes[2].symbol === "X" ||
+                    boxes[4].symbol === "X"
+                ) {
                     const newBoxes = [...updateBoxes];
                     newBoxes[6] = {
                         symbol: "O",
@@ -176,7 +198,6 @@ export default function GameCom() {
                     boxes[7].symbol === "X" ||
                     boxes[8].symbol === "X"
                 ) {
-                    console.log("2222");
                     const newBoxes = [...updateBoxes];
                     newBoxes[2] = {
                         symbol: "O",
@@ -184,7 +205,11 @@ export default function GameCom() {
                     setBox(newBoxes);
                 }
             } else if (RandomCorner === 6) {
-                if (boxes[3].symbol === "X" || boxes[0].symbol === "X") {
+                if (
+                    boxes[3].symbol === "X" ||
+                    boxes[0].symbol === "X" ||
+                    boxes[4].symbol === "X"
+                ) {
                     const newBoxes = [...updateBoxes];
                     newBoxes[8] = {
                         symbol: "O",
@@ -206,7 +231,11 @@ export default function GameCom() {
                     setBox(newBoxes);
                 }
             } else if (RandomCorner === 2) {
-                if (boxes[5].symbol === "X" || boxes[8].symbol === "X") {
+                if (
+                    boxes[5].symbol === "X" ||
+                    boxes[8].symbol === "X" ||
+                    boxes[4].symbol === "X"
+                ) {
                     const newBoxes = [...updateBoxes];
                     newBoxes[0] = {
                         symbol: "O",
@@ -228,7 +257,11 @@ export default function GameCom() {
                     setBox(newBoxes);
                 }
             } else if (RandomCorner === 8) {
-                if (boxes[7].symbol === "X" || boxes[6].symbol === "X") {
+                if (
+                    boxes[7].symbol === "X" ||
+                    boxes[6].symbol === "X" ||
+                    boxes[4].symbol === "X"
+                ) {
                     const newBoxes = [...updateBoxes];
                     newBoxes[2] = {
                         symbol: "O",
@@ -251,9 +284,8 @@ export default function GameCom() {
                 }
             }
             setCount((prev) => prev + 1);
-            // setSecondTurnFlagON(false);
             return;
-        } else if (countX === 2 && SecondTurnFlagON) {
+        } else if (countX === 2 && SecondTurnFlagON && TurnOffTheMiddleFlag) {
             if (RandomCorner === 0) {
                 if (boxes[1].symbol === "X" || boxes[2].symbol === "X") {
                     const newBoxes = [...updateBoxes];
@@ -341,7 +373,7 @@ export default function GameCom() {
                         symbol: "O",
                     };
                     setBox(newBoxes);
-                } else if ( 
+                } else if (
                     boxes[5].symbol === "X" ||
                     boxes[1].symbol === "X" ||
                     boxes[2].symbol === "X"
@@ -354,7 +386,7 @@ export default function GameCom() {
                 }
             }
             setCount((prev) => prev + 1);
-            // setSecondTurnFlagON(false);
+            setSecondTurnFlagON(false);
             return;
         }
 
