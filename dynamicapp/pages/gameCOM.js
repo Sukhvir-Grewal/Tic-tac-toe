@@ -22,6 +22,8 @@ import StarsComponent from "@/components/stars";
 
 export default function GameCom() {
     const [count, setCount] = useState(0);
+    const [drawCount, setDrawCount] = useState(0);
+    const [RandomCorner, setRandomCorner] = useState();
     const [boxes, setBox] = useState([...Array(9).fill({ symbol: "" })]);
     const [winnerNotFound, setWinnerNotFound] = useState(true);
     const [PlayerScore, setPlayerScore] = useState(0);
@@ -29,7 +31,9 @@ export default function GameCom() {
     const [GoHome, setGoHome] = useState(false);
     const [drawFlag, setDrawFlag] = useState(false);
     const [checkOneTime, setCheckOneTime] = useState(true);
-    const [playerWinsRound, setPlayerWinsRound] = useState(false);
+    const [ComputerTurn, setComputerTurn] = useState(false);
+    const [SecondTurnFlagON, setSecondTurnFlagON] = useState(false);
+    const [lastPlayerMove, setLastPlayerMove] = useState(-1);
     const [round, setRound] = useState(1);
     const [WinnerName, setWinnerName] = useState("");
     const [playRound1SoundOnce, setPlayRound1SoundOnce] = useState(true);
@@ -103,15 +107,22 @@ export default function GameCom() {
         checkWinner();
         controlScreen();
         checkWinCondition();
-        OnFirstLoad();
-
+        // OnFirstLoad();
+        if (ComputerTurn) {
+            setTimeout(() => {
+                computerMove(boxes);
+                setCount((prev) => prev + 1);
+            }, 100);
+            setComputerTurn(false);
+        }
         if (GoHome) router.push("/");
-    }, [PlayerScore, ComputerScore, count, GoHome]);
+    }, [PlayerScore, ComputerScore, count, GoHome, ComputerTurn, boxes]);
 
     function ChangeSymbol(index) {
         if (!winnerNotFound) {
             return;
         }
+        setLastPlayerMove(index);
         if (boxes[index].symbol === "") {
             playAudio(clickSound);
             boxes[index] = {
@@ -123,7 +134,6 @@ export default function GameCom() {
                     computerMove(boxes);
                 }, 500);
             }
-            setPlayerWinsRound(false);
             setCount((prev) => prev + 1);
         }
     }
@@ -132,6 +142,222 @@ export default function GameCom() {
         var RandomNumber;
         var moveNotFound = true;
         var emptySpace = false;
+
+        // If Computer Have First Turn Choose one corner
+        if (boxesIsEmpty()) {
+            var corners = [0, 2, 6, 8];
+            var tempRam = corners[Math.floor(Math.random() * corners.length)];
+            setRandomCorner(tempRam);
+            boxes[tempRam] = {
+                symbol: "O",
+            };
+            setCount((prev) => prev + 1);
+            setSecondTurnFlagON(true);
+            return;
+        }
+
+        // Check the Number of X in Board to choose second and third move for computer
+        var countX = boxes.filter((box) => box.symbol === "X").length;
+
+        if (countX === 1 && SecondTurnFlagON) {
+            if (RandomCorner === 0) {
+                if (boxes[1].symbol === "X" || boxes[2].symbol === "X") {
+                    console.log("1111");
+
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[6] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (
+                    boxes[3].symbol === "X" ||
+                    boxes[5].symbol === "X" ||
+                    boxes[6].symbol === "X" ||
+                    boxes[7].symbol === "X" ||
+                    boxes[8].symbol === "X"
+                ) {
+                    console.log("2222");
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[2] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            } else if (RandomCorner === 6) {
+                if (boxes[3].symbol === "X" || boxes[0].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                    console.log("3333");
+                } else if (
+                    boxes[7].symbol === "X" ||
+                    boxes[8].symbol === "X" ||
+                    boxes[1].symbol === "X" ||
+                    boxes[2].symbol === "X" ||
+                    boxes[5].symbol === "X"
+                ) {
+                    console.log("4444");
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[0] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            } else if (RandomCorner === 2) {
+                if (boxes[5].symbol === "X" || boxes[8].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[0] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                    console.log("3333");
+                } else if (
+                    boxes[0].symbol === "X" ||
+                    boxes[6].symbol === "X" ||
+                    boxes[1].symbol === "X" ||
+                    boxes[3].symbol === "X" ||
+                    boxes[7].symbol === "X"
+                ) {
+                    console.log("4444");
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            } else if (RandomCorner === 8) {
+                if (boxes[7].symbol === "X" || boxes[6].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[2] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                    console.log("3333");
+                } else if (
+                    boxes[0].symbol === "X" ||
+                    boxes[5].symbol === "X" ||
+                    boxes[1].symbol === "X" ||
+                    boxes[3].symbol === "X" ||
+                    boxes[2].symbol === "X"
+                ) {
+                    console.log("4444");
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[6] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            }
+            setCount((prev) => prev + 1);
+            // setSecondTurnFlagON(false);
+            return;
+        } else if (countX === 2 && SecondTurnFlagON) {
+            if (RandomCorner === 0) {
+                if (boxes[1].symbol === "X" || boxes[2].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (lastPlayerMove === 8 || lastPlayerMove === 5) {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (
+                    boxes[3].symbol === "X" ||
+                    boxes[6].symbol === "X" ||
+                    boxes[7].symbol === "X"
+                ) {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            } else if (RandomCorner === 6) {
+                if (boxes[3].symbol === "X" || boxes[0].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[2] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (lastPlayerMove === 1 || lastPlayerMove === 2) {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (
+                    boxes[7].symbol === "X" ||
+                    boxes[8].symbol === "X" ||
+                    boxes[5].symbol === "X"
+                ) {
+                    console.log("4444");
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[2] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            } else if (RandomCorner === 2) {
+                if (boxes[5].symbol === "X" || boxes[8].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[6] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (lastPlayerMove === 6 || lastPlayerMove === 7) {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[8] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (
+                    boxes[0].symbol === "X" ||
+                    boxes[1].symbol === "X" ||
+                    boxes[3].symbol === "X"
+                ) {
+                    console.log("4444");
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[6] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            } else if (RandomCorner === 8) {
+                if (boxes[7].symbol === "X" || boxes[6].symbol === "X") {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[0] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (lastPlayerMove === 0 || lastPlayerMove === 3) {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[2] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                } else if (
+                    boxes[5].symbol === "X" ||
+                    boxes[1].symbol === "X" ||
+                    boxes[2].symbol === "X"
+                ) {
+                    const newBoxes = [...updateBoxes];
+                    newBoxes[0] = {
+                        symbol: "O",
+                    };
+                    setBox(newBoxes);
+                }
+            }
+            setCount((prev) => prev + 1);
+            // setSecondTurnFlagON(false);
+            return;
+        }
+
         updateBoxes.forEach((btn) => {
             if (btn.symbol === "") emptySpace = true;
         });
@@ -152,6 +378,10 @@ export default function GameCom() {
             }
         }
         setCount((prev) => prev + 1);
+    }
+
+    function boxesIsEmpty() {
+        return boxes.every((box) => box.symbol === "");
     }
 
     function checkWinner() {
@@ -177,6 +407,10 @@ export default function GameCom() {
                 ) {
                     if (boxes[a].symbol === "X") {
                         setPlayerScore((prev) => prev + 1);
+                        setTimeout(() => {
+                            computerMove(boxes);
+                            setCount((prev) => prev + 1);
+                        }, 2000);
                     } else {
                         setComputerScore((prev) => prev + 1);
                     }
@@ -322,10 +556,15 @@ export default function GameCom() {
                 setTimeout(() => {
                     if (boxes) {
                         // Check if boxes is defined
-                        const updatedBoxes = boxes.map((box) => ({
-                            symbol: "",
-                        }));
-                        setBox(updatedBoxes); // Update the state to trigger a re-render
+                        // const updatedBoxes = [...boxes];
+                        boxes.forEach((box) => {
+                            box.symbol = "";
+                        });
+                        setDrawCount((prev) => prev + 1);
+                        drawCount % 2 === 0
+                            ? setComputerTurn(true)
+                            : setComputerTurn(false);
+                        // setBox(updatedBoxes); // Update the state to trigger a re-render
                     }
                 }, 1500);
                 setCount(0);

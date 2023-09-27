@@ -6,15 +6,14 @@ import { useRouter } from "next/router";
 
 export default function Home() {
     const [hoveredCard, setHoveredCard] = useState(null);
-    const router = useRouter()
+    const router = useRouter();
 
     const handleCardHover = (gameMode) => {
         setHoveredCard(gameMode);
     };
-    useEffect(()=>{
-        router.push("/gameCOM")
-
-    }) 
+    useEffect(() => {
+        router.push("/gameCOM");
+    });
 
     return (
         <>
@@ -30,8 +29,8 @@ export default function Home() {
             >
                 <Link
                     href={{
-                        pathname:"/form",
-                        query:{gameMode:"BOT"}
+                        pathname: "/form",
+                        query: { gameMode: "BOT" },
                     }}
                     style={{ textDecoration: "none" }}
                     onMouseEnter={() => handleCardHover("BOT")} // Handle mouse enter
@@ -56,8 +55,8 @@ export default function Home() {
                 </Link>
                 <Link
                     href={{
-                        pathname:"/form",
-                        query:{gameMode:"IG"}
+                        pathname: "/form",
+                        query: { gameMode: "IG" },
                     }}
                     style={{ textDecoration: "none" }}
                     onMouseEnter={() => handleCardHover("IG")} // Handle mouse enter
